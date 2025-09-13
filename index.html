@@ -45,7 +45,7 @@
     /* --- 新增燈箱效果的 CSS --- */
     .room-gallery a{cursor:zoom-in;display:block}
     .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0s 0.2s}
-    .lightbox:target{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
+    .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
   </style>
@@ -106,8 +106,8 @@
           <div class="rooms">
             <div class="room">
               <div class="room-gallery">
-                <a href="#lightbox-1"><img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖"></a>
-                <a href="#lightbox-2"><img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景"></a>
+                <a href="#" class="img-link" data-img-src="dreamy-seaview-a1.jpg" data-alt="夢幻海景房主圖"><img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖"></a>
+                <a href="#" class="img-link" data-img-src="dreamy-seaview-a2.jpg" data-alt="夢幻海景房夜景"><img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景"></a>
               </div>
               <div class="info">
                 <h4>夢幻海景房</h4>
@@ -117,8 +117,8 @@
             </div>
             <div class="room">
               <div class="room-gallery">
-                <a href="#lightbox-3"><img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖"></a>
-                <a href="#lightbox-4"><img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽"></a>
+                <a href="#" class="img-link" data-img-src="mountain-ocean-view-b1.jpg" data-alt="山海景觀房主圖"><img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖"></a>
+                <a href="#" class="img-link" data-img-src="mountain-ocean-view-b2.jpg" data-alt="山海景觀房夕陽"><img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽"></a>
               </div>
               <div class="info">
                 <h4>山海景觀房</h4>
@@ -128,8 +128,8 @@
             </div>
             <div class="room">
               <div class="room-gallery">
-                <a href="#lightbox-5"><img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖"></a>
-                <a href="#lightbox-6"><img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照"></a>
+                <a href="#" class="img-link" data-img-src="sky-balcony-c1.jpg" data-alt="天空陽台家庭房主圖"><img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖"></a>
+                <a href="#" class="img-link" data-img-src="sky-balcony-c2.jpg" data-alt="天空陽台家庭房夕照"><img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照"></a>
               </div>
               <div class="info">
                 <h4>天空陽台家庭房</h4>
@@ -161,7 +161,6 @@
             <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!2m..." allowfullscreen></iframe>
           </div>
         </article>
-
       </div>
 
       <aside class="sidebar">
@@ -170,29 +169,22 @@
           <form class="booking-form" action="https://formspree.io/f/mblabdyr" method="POST">
             <label for="name">您的姓名</label>
             <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
-
             <label for="phone">您的手機</label>
             <input type="tel" id="phone" name="手機" required placeholder="請輸入手機號碼">
-
             <label for="email-input">您的 Email</label>
             <input type="email" id="email-input" name="Email" required placeholder="example@gmail.com">
-
             <label for="checkin">入住日期</label>
             <input type="date" id="checkin" name="入住日期" required>
-            
             <label for="checkout">退房日期</label>
             <input type="date" id="checkout" name="退房日期" required>
-            
             <label for="room">選擇房型</label>
             <select id="room" name="選擇房型" required>
               <option>夢幻海景房</option>
               <option>山海景觀房</option>
               <option>天空陽台家庭房</option>
             </select>
-            
             <label for="guests">入住人數</label>
             <input type="number" id="guests" name="入住人數" min="1" max="6" value="2" required>
-
             <button type="submit">送出訂房需求</button>
           </form>
           <p style="margin-top:10px;font-size:13px;color:var(--muted)">※ 表單送出後，我們將以 Email 或電話與您確認訂房。</p>
@@ -208,7 +200,7 @@
             <li>是否可攜帶寵物：需事先告知</li>
           </ul>
         </div>
-
+        
         <div class="card" style="margin-top:18px">
           <h4>社群連結</h4>
           <p>Facebook / Instagram（請放上您的實際連結）</p>
@@ -217,34 +209,35 @@
     </section>
   </main>
   
-  <div id="lightbox-1" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖">
-  </div>
-  <div id="lightbox-2" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景">
-  </div>
-  <div id="lightbox-3" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖">
-  </div>
-  <div id="lightbox-4" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽">
-  </div>
-  <div id="lightbox-5" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖">
-  </div>
-  <div id="lightbox-6" class="lightbox">
-    <a href="#" class="close">×</a>
-    <img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照">
+  <div id="lightbox" class="lightbox">
+    <span class="close">×</span>
+    <img src="" alt="">
   </div>
 
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const imgLinks = document.querySelectorAll('.img-link');
+
+    imgLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const imgSrc = link.dataset.imgSrc;
+        const imgAlt = link.dataset.alt;
+        lightboxImg.src = imgSrc;
+        lightboxImg.alt = imgAlt;
+        lightbox.classList.add('open');
+      });
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target.matches('.close') || e.target.matches('.lightbox')) {
+        lightbox.classList.remove('open');
+      }
     });
   </script>
 </body>
