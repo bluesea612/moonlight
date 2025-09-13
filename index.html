@@ -19,40 +19,35 @@
     .hero{max-width:1200px;margin:32px auto 0;padding:24px;background:rgba(255,255,255,0.05);border-radius:12px}
     .hero .tag{background:rgba(255,255,255,0.18);display:inline-block;padding:6px 12px;border-radius:20px;font-size:14px}
     .grid{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1200px;margin:32px auto;padding:0 16px}
-
-    /* 卡片 */
     .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(10,20,30,0.07)}
     .card h3{margin-top:0;font-weight:600;color:var(--dark)}
     .news-list li{margin-bottom:14px}
     .news-list time{display:block;color:var(--muted);font-size:13px}
-
-    /* 房型 */
     .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
     .room{overflow:hidden;border-radius:12px;background:#fff;display:flex;flex-direction:column}
     .room-gallery{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;height:180px;overflow:hidden}
     .room-gallery img{width:100%;height:100%;object-fit:cover;display:block}
     .room .info{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
     .room h4{margin:0 0 8px;font-size:18px;font-weight:600;color:var(--dark)}
-
-    /* 側欄 */
     .sidebar .book-btn{display:block;background:var(--accent);color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:600}
     .sidebar h3,.sidebar h4{margin-top:0;color:var(--dark)}
     .map{width:100%;height:220px;border-radius:10px;overflow:hidden}
-
     footer{background:#07122a;color:#cbdcec;padding:32px 16px;margin-top:36px}
     footer .wrap{max-width:1200px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap}
     .footer-col{flex:1;min-width:220px}
     footer h4{margin-top:0;font-weight:600;color:#fff}
-
-    /* 訂房表單 */
     .booking-form{display:flex;flex-direction:column;gap:10px;margin-top:12px}
     .booking-form label{font-size:14px;font-weight:600;color:var(--dark)}
     .booking-form input,.booking-form select{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit}
     .booking-form button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
     .booking-form button:hover{background:#176fcd}
-
-    /* 響應式 */
     @media (max-width:900px){.grid{grid-template-columns:1fr}.nav{padding-bottom:8px}.hero{padding:16px}}
+    /* --- 新增燈箱效果的 CSS --- */
+    .room-gallery a{cursor:zoom-in;display:block}
+    .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0s 0.2s}
+    .lightbox:target{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
+    .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
+    .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
   </style>
 </head>
 <body>
@@ -111,8 +106,8 @@
           <div class="rooms">
             <div class="room">
               <div class="room-gallery">
-                <img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖">
-                <img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景">
+                <a href="#lightbox-1"><img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖"></a>
+                <a href="#lightbox-2"><img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景"></a>
               </div>
               <div class="info">
                 <h4>夢幻海景房</h4>
@@ -122,8 +117,8 @@
             </div>
             <div class="room">
               <div class="room-gallery">
-                <img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖">
-                <img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽">
+                <a href="#lightbox-3"><img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖"></a>
+                <a href="#lightbox-4"><img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽"></a>
               </div>
               <div class="info">
                 <h4>山海景觀房</h4>
@@ -133,8 +128,8 @@
             </div>
             <div class="room">
               <div class="room-gallery">
-                <img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖">
-                <img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照">
+                <a href="#lightbox-5"><img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖"></a>
+                <a href="#lightbox-6"><img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照"></a>
               </div>
               <div class="info">
                 <h4>天空陽台家庭房</h4>
@@ -242,6 +237,31 @@
       </div>
     </div>
   </footer>
+  
+  <div id="lightbox-1" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖">
+  </div>
+  <div id="lightbox-2" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景">
+  </div>
+  <div id="lightbox-3" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖">
+  </div>
+  <div id="lightbox-4" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽">
+  </div>
+  <div id="lightbox-5" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖">
+  </div>
+  <div id="lightbox-6" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照">
+  </div>
 
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -250,3 +270,4 @@
   </script>
 </body>
 </html>
+
