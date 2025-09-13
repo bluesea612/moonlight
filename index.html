@@ -1,0 +1,252 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>月光藍海 - 海邊民宿</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap');
+    :root{--accent:#1e90ff;--dark:#0b2545;--muted:#667;--radius:14px;--bg:#f7fafc}
+    *{box-sizing:border-box}
+    body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg)}
+    header{background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;color:#fff;padding:40px 16px}
+    .nav{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:22px;margin:0;font-weight:700}
+    nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
+    nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
+    nav a:hover{background:rgba(255,255,255,0.1)}
+    .hero{max-width:1200px;margin:32px auto 0;padding:24px;background:rgba(255,255,255,0.05);border-radius:12px}
+    .hero .tag{background:rgba(255,255,255,0.18);display:inline-block;padding:6px 12px;border-radius:20px;font-size:14px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1200px;margin:32px auto;padding:0 16px}
+
+    /* 卡片 */
+    .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(10,20,30,0.07)}
+    .card h3{margin-top:0;font-weight:600;color:var(--dark)}
+    .news-list li{margin-bottom:14px}
+    .news-list time{display:block;color:var(--muted);font-size:13px}
+
+    /* 房型 */
+    .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+    .room{overflow:hidden;border-radius:12px;background:#fff;display:flex;flex-direction:column}
+    .room-gallery{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;height:180px;overflow:hidden}
+    .room-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+    .room .info{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+    .room h4{margin:0 0 8px;font-size:18px;font-weight:600;color:var(--dark)}
+
+    /* 側欄 */
+    .sidebar .book-btn{display:block;background:var(--accent);color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:600}
+    .sidebar h3,.sidebar h4{margin-top:0;color:var(--dark)}
+    .map{width:100%;height:220px;border-radius:10px;overflow:hidden}
+
+    footer{background:#07122a;color:#cbdcec;padding:32px 16px;margin-top:36px}
+    footer .wrap{max-width:1200px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap}
+    .footer-col{flex:1;min-width:220px}
+    footer h4{margin-top:0;font-weight:600;color:#fff}
+
+    /* 訂房表單 */
+    .booking-form{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .booking-form label{font-size:14px;font-weight:600;color:var(--dark)}
+    .booking-form input,.booking-form select{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit}
+    .booking-form button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+    .booking-form button:hover{background:#176fcd}
+
+    /* 響應式 */
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.nav{padding-bottom:8px}.hero{padding:16px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="white" opacity="0.12"/><path d="M3 12c0-4 4-8 9-8s9 4 9 8-4 8-9 8S3 16 3 12z" stroke="white" stroke-width="0.8" fill="none"/></svg>
+        <h1>月光藍海</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#intro">旅宿介紹</a></li>
+          <li><a href="#rooms">房型資訊</a></li>
+          <li><a href="#reviews">口碑好評</a></li>
+          <li><a href="#deals">優惠方案</a></li>
+          <li><a href="#transport">交通指引</a></li>
+          <li><a href="#booking">線上訂房</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero">
+      <span class="tag">東海岸海景民宿</span>
+      <h2 style="margin:8px 0 4px;font-weight:700">在月光之下，聽海的故事 — 月光藍海</h2>
+      <p style="margin:0;color:rgba(255,255,255,0.9)">僅需 3 分鐘步行到達海灘。清晨迎接日出，夜晚仰望繁星，幸運時還能看見傳說中的「月光海」。
+        我們用心打造溫暖的居所，讓每一位旅人都能在此留下美好記憶。</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid" aria-label="主要內容">
+      <div>
+        <article class="card" id="intro">
+          <h3>旅宿介紹</h3>
+          <p>「月光藍海」是一家與大自然共生的海邊民宿。白天可遠眺蔚藍太平洋，夜晚則有月光倒映在海面的浪漫奇景。這裡不只是住宿的地方，更是一段旅行的開始，一個能讓您慢下腳步，靜心感受山海交織的所在。</p>
+        </article>
+
+        <article class="card" id="news" style="margin-top:18px">
+          <h3>最新消息</h3>
+          <ul class="news-list">
+            <li>
+              <strong>東部特殊景觀 — 月光海觀察期</strong>
+              <time>2025-08-20</time>
+              <p style="margin:6px 0 0">晴朗少雲的夜晚，您將有機會欣賞到「月光海」。我們會不定期公布最佳觀賞日期與行程建議。</p>
+            </li>
+            <li>
+              <strong>環保倡議：自備盥洗用品</strong>
+              <time>2023-10-27</time>
+              <p style="margin:6px 0 0">為了地球永續，我們提供補充式沐浴乳與洗髮乳，並鼓勵旅客自備牙刷與牙膏。</p>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card" id="rooms" style="margin-top:18px">
+          <h3>房型資訊</h3>
+          <div class="rooms">
+            <div class="room">
+              <div class="room-gallery">
+                <img src="https://images.unsplash.com/photo-1542382107-fd7c772be5cf?auto=format&fit=crop&w=800&q=60" alt="海景雙人房主圖">
+                <img src="https://images.unsplash.com/photo-1517409540068-154948a4731c?auto=format&fit=crop&w=800&q=60" alt="海景雙人房次圖">
+              </div>
+              <div class="info">
+                <h4>海景雙人房</h4>
+                <p>適合情侶或好友，窗外即可眺望海平線。房內備有舒適雙人床與陽台座椅。</p>
+                <p style="margin-top:6px;color:var(--muted)">價格：NT$2,800 起（含早餐）</p>
+              </div>
+            </div>
+            <div class="room">
+              <div class="room-gallery">
+                <img src="https://images.unsplash.com/photo-1550596334-754641666e51?auto=format&fit=crop&w=800&q=60" alt="庭院家庭房主圖">
+                <img src="https://images.unsplash.com/photo-1577909385025-b77873173e34?auto=format&fit=crop&w=800&q=60" alt="庭院家庭房次圖">
+              </div>
+              <div class="info">
+                <h4>庭院家庭房</h4>
+                <p>坐擁綠意庭院景觀，適合家庭或朋友團體入住。提供兩張雙人床，可彈性加床。</p>
+                <p style="margin-top:6px;color:var(--muted)">價格：NT$3,600 起（含早餐）</p>
+              </div>
+            </div>
+            <div class="room">
+              <div class="room-gallery">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60" alt="豪華海景套房主圖">
+                <img src="https://images.unsplash.com/photo-1516086884042-b91c015b3671?auto=format&fit=crop&w=800&q=60" alt="豪華海景套房次圖">
+              </div>
+              <div class="info">
+                <h4>豪華海景套房</h4>
+                <p>專屬陽台與浴缸，夜晚泡澡即可欣賞月光海。最適合慶祝紀念日與浪漫假期。</p>
+                <p style="margin-top:6px;color:var(--muted)">價格：NT$4,500 起（含早餐）</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" id="reviews" style="margin-top:18px">
+          <h3>口碑好評</h3>
+          <blockquote style="margin:0;padding:14px;border-left:4px solid #eee;background:#fafafa;border-radius:8px">「月光海真的好浪漫，民宿很乾淨，老闆娘也很熱心幫忙規劃行程，絕對值得再訪！」 — 王小姐</blockquote>
+        </article>
+
+        <article class="card" id="deals" style="margin-top:18px">
+          <h3>優惠方案</h3>
+          <ul>
+            <li>平日連住兩晚以上，享 9 折優惠</li>
+            <li>三人同行入住海景套房，第 3 人免費</li>
+            <li>生日當月入住，加贈精緻甜點與飲品</li>
+          </ul>
+        </article>
+
+        <article class="card" id="transport" style="margin-top:18px">
+          <h3>交通指引</h3>
+          <p>距離花蓮火車站約 20 分鐘車程。可預約接駁服務或自行開車前往，民宿提供免費停車位。步行 3 分鐘即可到達海灘。</p>
+          <div class="map" style="margin-top:10px">
+            <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!2m..." allowfullscreen></iframe>
+          </div>
+        </article>
+
+      </div>
+
+      <aside class="sidebar">
+        <div class="card" id="booking">
+          <h3>線上訂房</h3>
+          <form class="booking-form" action="https://formspree.io/f/mblabdyr" method="POST">
+            <label for="name">您的姓名</label>
+            <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
+
+            <label for="phone">您的手機</label>
+            <input type="tel" id="phone" name="手機" required placeholder="請輸入手機號碼">
+
+            <label for="email-input">您的 Email</label>
+            <input type="email" id="email-input" name="Email" required placeholder="example@gmail.com">
+
+            <label for="checkin">入住日期</label>
+            <input type="date" id="checkin" name="入住日期" required>
+            
+            <label for="checkout">退房日期</label>
+            <input type="date" id="checkout" name="退房日期" required>
+            
+            <label for="room">選擇房型</label>
+            <select id="room" name="選擇房型" required>
+              <option>海景雙人房</option>
+              <option>庭院家庭房</option>
+              <option>豪華海景套房</option>
+            </select>
+            
+            <label for="guests">入住人數</label>
+            <input type="number" id="guests" name="入住人數" min="1" max="6" value="2" required>
+
+            <button type="submit">送出訂房需求</button>
+          </form>
+          <p style="margin-top:10px;font-size:13px;color:var(--muted)">※ 表單送出後，我們將以 Email 或電話與您確認訂房。</p>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h4>聯絡資訊</h4>
+          <p style="margin:6px 0">電話：09xx-xxx-xxx<br>Email：contact@moonblue.com</p>
+          <h4 style="margin-top:12px">常見問題</h4>
+          <ul style="margin:6px 0;padding-left:18px;color:var(--muted)">
+            <li>入住時間：15:00 後</li>
+            <li>退房時間：11:00 前</li>
+            <li>是否可攜帶寵物：需事先告知</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h4>社群連結</h4>
+          <p>Facebook / Instagram（請放上您的實際連結）</p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-col">
+        <h4>月光藍海</h4>
+        <p>地址：花蓮縣壽豐鄉橄樹腳16號（範例）<br>電話：03-xxxxxxx / 手機：09xx-xxx-xxx</p>
+      </div>
+      <div class="footer-col">
+        <h4>快速連結</h4>
+        <ul style="padding-left:18px;color:#c8d7f5">
+          <li><a href="#rooms" style="color:inherit">房型資訊</a></li>
+          <li><a href="#deals" style="color:inherit">優惠方案</a></li>
+          <li><a href="#booking" style="color:inherit">線上訂房</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>營業資訊</h4>
+        <p>Check-in: 15:00｜Check-out: 11:00<br>Email: contact@moonblue.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});
+    });
+  </script>
+</body>
+</html>
