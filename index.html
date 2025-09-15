@@ -9,22 +9,15 @@
     :root{--accent:#1e90ff;--dark:#0b2545;--muted:#667;--radius:14px;--bg:#f7fafc}
     *{box-sizing:border-box}
     body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg)}
-    header{background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5));color:#fff;padding:40px 16px;overflow:hidden;position:relative;height:550px;}
-    #three-js-canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-    .nav{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;position:relative;z-index:10}
+    header{background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5));color:#fff;padding:40px 16px;overflow:hidden;position:relative;perspective:1600px;perspective-origin: center center}
+    header::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=60');background-size:cover;background-position:center;z-index:-1;animation:pan-3d 50s linear infinite}
+    .nav{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
     .brand{display:flex;align-items:center;gap:12px}
     .brand h1{font-size:22px;margin:0;font-weight:700}
     nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
     nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
     nav a:hover{background:rgba(255,255,255,0.1)}
-    .hero{max-width:1200px;margin:32px auto 0;padding:24px;background:rgba(255,255,255,0.05);border-radius:12px;position:relative;z-index:10}
+    .hero{max-width:1200px;margin:32px auto 0;padding:24px;background:rgba(255,255,255,0.05);border-radius:12px}
     .hero .tag{background:rgba(255,255,255,0.18);display:inline-block;padding:6px 12px;border-radius:20px;font-size:14px}
     .grid{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1200px;margin:32px auto;padding:0 16px}
     .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(10,20,30,0.07)}
@@ -56,11 +49,22 @@
     .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
+    /* --- 頁首背景3D環繞動畫 --- */
+    @keyframes pan-3d {
+      0% {
+        transform: translateZ(0) rotateY(0deg);
+      }
+      80% { /* 40秒 / 50秒 = 0.8 */
+        transform: translateZ(0) rotateY(-360deg);
+      }
+      100% {
+        transform: translateZ(0) rotateY(-360deg); /* 確保靜止效果 */
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <canvas id="three-js-canvas"></canvas>
     <div class="nav">
       <div class="brand">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="white" opacity="0.12"/><path d="M3 12c0-4 4-8 9-8s9 4 9 8-4 8-9 8S3 16 3 12z" stroke="white" stroke-width="0.8" fill="none"/></svg>
@@ -233,74 +237,8 @@
     <span class="close">×</span>
     <img src="" alt="">
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // Three.js 3D 全景初始化
-    const canvas = document.getElementById('three-js-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 550, 0.1, 1000); // 調整 aspect ratio 為 header 的寬高比
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    renderer.setSize(window.innerWidth, 550); // 設置渲染器大小與 header 一致
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    const textureLoader = new THREE.TextureLoader();
-    textureLoader.load(
-      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=60',
-      (texture) => {
-        const geometry = new THREE.SphereGeometry(500, 60, 40);
-        // 將材質貼到球體內側
-        geometry.scale(-1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ map: texture });
-        const sphere = new THREE.Mesh(geometry, material);
-        scene.add(sphere);
-      },
-      undefined,
-      (err) => {
-        console.error('An error happened loading the texture:', err);
-      }
-    );
-
-    camera.position.set(0, 0, 0.1); // 將攝像機稍微向前移動，以確保在球體內部
-
-    let animateStartTime = Date.now();
-    const animationDuration = 40000; // 40秒旋轉
-    const staticDuration = 10000; // 10秒靜止
-    const totalDuration = animationDuration + staticDuration; // 總50秒
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      const elapsed = Date.now() - animateStartTime;
-      const loopTime = elapsed % totalDuration;
-
-      if (loopTime < animationDuration) {
-        // 旋轉階段
-        const progress = loopTime / animationDuration;
-        camera.rotation.y = -progress * Math.PI * 2; // 左右旋轉一圈
-        camera.rotation.x = Math.sin(progress * Math.PI * 2 * 0.1) * 0.05; // 輕微上下擺動，模擬前後翻轉
-      } else {
-        // 靜止階段
-        // 保持在旋轉結束時的位置
-        camera.rotation.y = -Math.PI * 2;
-        camera.rotation.x = Math.sin(Math.PI * 2 * 0.1) * 0.05;
-      }
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // 處理視窗大小調整
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / 550; // 重新設置 aspect ratio
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, 550); // 重新設置渲染器大小
-    });
-
-    // 頁面滾動平滑效果
     document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});});
-    
-    // 燈箱效果
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
     const imgLinks = document.querySelectorAll('.img-link');
