@@ -9,7 +9,16 @@
     :root{--accent:#1e90ff;--dark:#0b2545;--muted:#667;--radius:14px;--bg:#f7fafc}
     *{box-sizing:border-box}
     body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg)}
-    header{background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5));color:#fff;padding:40px 16px;overflow:hidden;position:relative;perspective:1600px;perspective-origin: center center}
+    header{
+      background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5));
+      color:#fff;
+      padding:40px 16px;
+      overflow:hidden;
+      position:relative;
+      perspective:1600px;
+      perspective-origin: center center;
+      height: auto;
+    }
     header::before{
       content:'';
       position:absolute;
@@ -17,11 +26,15 @@
       left:0;
       width:100%;
       height:100%;
-      background-image:url('milky-way.jpg'); /* 背景圖已更名 */
       background-size:cover;
       background-position:center;
       z-index:-1;
-      animation:pan-3d 60s linear infinite;
+    }
+    header[data-bg="0"]::before { background-image:url('milky-way.jpg'); }
+    header[data-bg="1"]::before { background-image:url('sunrise.jpg'); }
+    header[data-bg="2"]::before { background-image:url('rainbow.jpg'); }
+    .bg-animated::before {
+      animation: pan-3d 60s linear infinite;
     }
     .nav{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;position:relative;z-index:10;}
     .brand{display:flex;align-items:center;gap:12px}
@@ -29,7 +42,15 @@
     nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
     nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
     nav a:hover{background:rgba(255,255,255,0.1)}
-    .hero{max-width:1200px;margin:32px auto 0;padding:24px;background:rgba(255,255,255,0.05);border-radius:12px;position:relative;z-index:10;}
+    .hero{
+      max-width:1200px;
+      margin:32px auto 0;
+      padding:24px;
+      background:rgba(255,255,255,0.05);
+      border-radius:12px;
+      position:relative;
+      z-index:10;
+    }
     .hero .tag{background:rgba(255,255,255,0.18);display:inline-block;padding:6px 12px;border-radius:20px;font-size:14px}
     .grid{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1200px;margin:32px auto;padding:0 16px}
     .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(10,20,30,0.07)}
@@ -75,7 +96,7 @@
     }
     .timer {
       position: absolute;
-      bottom: 20px;
+      bottom: 25px;
       right: 20px;
       background: transparent;
       color: white;
@@ -84,12 +105,45 @@
       font-size: 14px;
       z-index: 100;
       font-weight: bold;
+      text-align: right;
+    }
+    .image-nav {
+      position: absolute;
+      bottom: 5px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      padding-bottom: 5px;
+    }
+    .image-nav button {
+      background: rgba(255,255,255,0.3);
+      border: none;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      color: white;
+      font-size: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-nav button:hover, .image-nav button.active {
+      background: rgba(255,255,255,0.7);
     }
   </style>
 </head>
 <body>
-  <header>
+  <header class="bg-animated" data-bg="0">
     <div class="timer">00:00</div>
+    <div class="image-nav">
+      <button data-index="0" class="active">1</button>
+      <button data-index="1">2</button>
+      <button data-index="2">3</button>
+    </div>
     <div class="nav">
       <div class="brand">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="white" opacity="0.12"/><path d="M3 12c0-4 4-8 9-8s9 4 9 8-4 8-9 8S3 16 3 12z" stroke="white" stroke-width="0.8" fill="none"/></svg>
@@ -283,10 +337,15 @@
       }
     });
 
-    // 全景計時器功能
+    const header = document.querySelector('header');
     const timerDisplay = document.querySelector('.timer');
-    const totalTime = 60; 
-    let timer = totalTime;
+    const imageNavButtons = document.querySelectorAll('.image-nav button');
+    const images = ['milky-way.jpg', 'sunrise.jpg', 'rainbow.jpg'];
+    const totalTimePerImage = 60;
+
+    let currentImageIndex = 0;
+    let timerInterval;
+    let timeLeft = totalTimePerImage;
 
     function formatTime(seconds) {
       const min = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -294,18 +353,36 @@
       return `${min}:${sec}`;
     }
 
-    function updateTimer() {
-      timerDisplay.textContent = formatTime(timer);
-      if (timer > 0) {
-        timer--;
-      } else {
-        timer = totalTime;
-      }
+    function switchImage(index) {
+      currentImageIndex = index;
+      header.setAttribute('data-bg', currentImageIndex);
+      imageNavButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+      imageNavButtons[currentImageIndex].classList.add('active');
     }
 
-    // 初始設定
-    updateTimer();
-    setInterval(updateTimer, 1000);
+    function updateTimer() {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        timeLeft = totalTimePerImage;
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        switchImage(currentImageIndex);
+      }
+      timerDisplay.textContent = formatTime(timeLeft);
+    }
+
+    // 初始化設定並啟動計時器
+    switchImage(0);
+    timerInterval = setInterval(updateTimer, 1000);
+
+    // 手動切換
+    imageNavButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const newIndex = parseInt(button.dataset.index);
+        switchImage(newIndex);
+      });
+    });
   </script>
 </body>
 </html>
