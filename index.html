@@ -30,9 +30,10 @@
       background-position:center;
       z-index:-1;
     }
-    header[data-bg="0"]::before { background-image:url('milky-way.jpg'); }
-    header[data-bg="1"]::before { background-image:url('sunrise.jpg'); }
-    header[data-bg="2"]::before { background-image:url('rainbow.jpg'); }
+    header[data-bg="0"]::before { background-image:url('sunrise.jpg'); }
+    header[data-bg="1"]::before { background-image:url('sea-of-clouds.jpg'); }
+    header[data-bg="2"]::before { background-image:url('sunset.jpg'); }
+    header[data-bg="3"]::before { background-image:url('starry-sky.jpg'); }
     .bg-animated::before {
       animation: pan-3d 60s linear infinite;
     }
@@ -87,7 +88,7 @@
       0% {
         transform: translateZ(0) rotateY(0deg);
       }
-      83.33% {
+      75% {
         transform: translateZ(0) rotateY(-360deg);
       }
       100% {
@@ -143,6 +144,7 @@
       <button data-index="0" class="active">1</button>
       <button data-index="1">2</button>
       <button data-index="2">3</button>
+      <button data-index="3">4</button>
     </div>
     <div class="nav">
       <div class="brand">
@@ -163,7 +165,7 @@
     <div class="hero">
       <span class="tag">海岸民宿</span>
       <h2 style="margin:8px 0 4px;font-weight:700">在月光與藍海間，遇見永恆的詩意 — 月光藍海</h2>
-      <p style="margin:0;color:rgba(255,255,255,0.9)">迎第一道曙光見最後一顆星辰，我們以四境(日出、夕陽、雲海、星空)書寫不朽之美。以千萬等級打造溫馨居所，讓每位旅人留下絕美回憶~不負此行滿載而歸。</p>
+      <p style="margin:0;color:rgba(255,255,255,0.9)">迎第一道曙光見最後一顆星辰，我們以四境(日出、雲海、夕陽、星空)書寫不朽之美。以千萬等級打造溫馨居所，讓每位旅人留下絕美回憶~不負此行滿載而歸。</p>
     </div>
   </header>
   <main>
@@ -340,7 +342,7 @@
     const header = document.querySelector('header');
     const timerDisplay = document.querySelector('.timer');
     const imageNavButtons = document.querySelectorAll('.image-nav button');
-    const images = ['milky-way.jpg', 'sunrise.jpg', 'rainbow.jpg'];
+    const images = ['sunrise.jpg', 'sea-of-clouds.jpg', 'sunset.jpg', 'starry-sky.jpg'];
     const totalTimePerImage = 60;
 
     let currentImageIndex = 0;
