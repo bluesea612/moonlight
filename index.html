@@ -148,6 +148,9 @@
     
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
+      header {
+        padding-top: 24px; /* 調整頁首頂部內距 */
+      }
       /* 使用直向圖片 */
       header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
       header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
@@ -165,6 +168,7 @@
         position: absolute;
         right: 16px;
         top: 24px;
+        z-index: 999; /* 提高漢堡圖示層級 */
       }
       .nav {
         flex-direction: column;
@@ -181,7 +185,7 @@
         background-color: rgba(11,37,69,0.9);
         padding: 80px 24px 24px;
         transition: left 0.3s ease-in-out;
-        z-index: 99;
+        z-index: 999; /* 提高導覽列層級 */
       }
       nav.active {
         left: 0; /* 顯示選單 */
@@ -195,6 +199,9 @@
         font-size: 18px;
         padding: 12px;
         display: block;
+      }
+      .brand h1 {
+        margin-top: 0; /* 修正標題上邊距 */
       }
       
       /* 調整頁首主標題區域 */
