@@ -76,13 +76,6 @@
     .booking-form input,.booking-form select{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit}
     .booking-form button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
     .booking-form button:hover{background:#176fcd}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}.nav{padding-bottom:8px}.hero{padding:16px}}
-    /* --- 燈箱效果 --- */
-    .room-gallery a{cursor:zoom-in;display:block}
-    .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0s 0.2s}
-    .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
-    .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
-    .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
     /* --- 頁首背景3D環繞動畫 --- */
     @keyframes pan-3d {
       0% {
@@ -134,6 +127,68 @@
     }
     .image-nav button:hover, .image-nav button.active {
       background: rgba(255,255,255,0.7);
+    }
+    /* --- 燈箱效果 --- */
+    .room-gallery a{cursor:zoom-in;display:block}
+    .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0s 0.2s}
+    .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
+    .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
+    .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
+    
+    /* === 手機版響應式優化（768px 以下）=== */
+    @media (max-width: 768px) {
+      /* 調整網格佈局 */
+      .grid {
+        grid-template-columns: 1fr; /* 將兩欄佈局改為單欄 */
+      }
+      
+      /* 調整頁首導覽列 */
+      .nav {
+        flex-direction: column; /* 將導覽列改為垂直排列 */
+        align-items: flex-start; /* 項目靠左對齊 */
+        gap: 16px;
+      }
+      .brand {
+        margin-bottom: 8px;
+      }
+      nav {
+        width: 100%;
+      }
+      nav ul {
+        flex-wrap: wrap; /* 導覽列項目換行 */
+        gap: 8px; /* 縮小項目間距 */
+      }
+      nav a {
+        padding: 6px 10px; /* 縮小按鈕大小 */
+        font-size: 14px; /* 縮小字體 */
+      }
+      
+      /* 調整頁首主標題區域 */
+      .hero {
+        padding: 16px;
+      }
+      .hero h2 {
+        font-size: 20px; /* 縮小標題字體 */
+      }
+      .hero p {
+        font-size: 14px; /* 縮小段落字體 */
+      }
+      
+      /* 調整頁尾佈局 */
+      footer .wrap {
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      /* 調整計時器與按鈕位置 */
+      .timer {
+        bottom: 50px;
+        right: 16px;
+      }
+      .image-nav {
+        bottom: 20px;
+        right: 16px;
+      }
     }
   </style>
 </head>
