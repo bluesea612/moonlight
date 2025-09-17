@@ -48,7 +48,7 @@
       max-width:1200px;
       margin:32px auto 0;
       padding:24px;
-      background:rgba(0,0,0,0.25); /* 新增半透明黑色遮罩 */
+      background:rgba(0,0,0,0.25);
       border-radius:12px;
       position:relative;
       z-index:10;
@@ -170,6 +170,7 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
+        width: 100%; /* 確保橫向充滿 */
       }
       nav {
         position: fixed;
@@ -239,8 +240,8 @@
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="white" opacity="0.12"/><path d="M3 12c0-4 4-8 9-8s9 4 9 8-4 8-9 8S3 16 3 12z" stroke="white" stroke-width="0.8" fill="none"/></svg>
         <h1>月光藍海</h1>
       </div>
+      <div class="menu-toggle">☰</div>
       <nav>
-        <div class="menu-toggle">☰</div>
         <ul>
           <li><a href="#intro">旅宿介紹</a></li>
           <li><a href="#rooms">房型資訊</a></li>
