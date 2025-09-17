@@ -30,6 +30,7 @@
       background-position:center;
       z-index:-1;
     }
+    /* 預設使用全景圖（適用於電腦和橫向平板） */
     header[data-bg="0"]::before { background-image:url('sunrise.jpg'); }
     header[data-bg="1"]::before { background-image:url('sea-of-clouds.jpg'); }
     header[data-bg="2"]::before { background-image:url('sunset.jpg'); }
@@ -137,6 +138,12 @@
     
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
+      /* 使用直向圖片 */
+      header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
+      header[data-bg="1"]::before { background-image:url('sea-of-clouds-mobile.jpg'); }
+      header[data-bg="2"]::before { background-image:url('sunset-mobile.jpg'); }
+      header[data-bg="3"]::before { background-image:url('starry-sky-mobile.jpg'); }
+      
       /* 調整網格佈局 */
       .grid {
         grid-template-columns: 1fr; /* 將兩欄佈局改為單欄 */
