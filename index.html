@@ -48,7 +48,7 @@
       max-width:1200px;
       margin:32px auto 0;
       padding:24px;
-      background:rgba(255,255,255,0.05);
+      background:rgba(0,0,0,0.25); /* 新增半透明黑色遮罩 */
       border-radius:12px;
       position:relative;
       z-index:10;
@@ -135,12 +135,22 @@
     .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
+
+    /* --- 新增漢堡選單樣式 --- */
+    .menu-toggle {
+        display: none; /* 預設隱藏 */
+        font-size: 32px;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 100;
+        color: white;
+    }
     
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
       /* 使用直向圖片 */
       header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
-      header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); } /* 檔案名稱已修改 */
+      header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
       header[data-bg="2"]::before { background-image:url('sunset-mobile.jpg'); }
       header[data-bg="3"]::before { background-image:url('starry-sky-mobile.jpg'); }
       
@@ -149,25 +159,41 @@
         grid-template-columns: 1fr; /* 將兩欄佈局改為單欄 */
       }
       
-      /* 調整頁首導覽列 */
+      /* 漢堡選單顯示，導覽列隱藏 */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 24px;
+      }
       .nav {
-        flex-direction: column; /* 將導覽列改為垂直排列 */
-        align-items: flex-start; /* 項目靠左對齊 */
+        flex-direction: column;
+        align-items: flex-start;
         gap: 16px;
       }
-      .brand {
-        margin-bottom: 8px;
-      }
       nav {
-        width: 100%;
+        position: fixed;
+        top: 0;
+        left: -100%; /* 預設隱藏在左側 */
+        width: 70%;
+        height: 100%;
+        background-color: rgba(11,37,69,0.9);
+        padding: 80px 24px 24px;
+        transition: left 0.3s ease-in-out;
+        z-index: 99;
+      }
+      nav.active {
+        left: 0; /* 顯示選單 */
       }
       nav ul {
-        flex-wrap: wrap; /* 導覽列項目換行 */
-        gap: 8px; /* 縮小項目間距 */
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
       }
       nav a {
-        padding: 6px 10px; /* 縮小按鈕大小 */
-        font-size: 14px; /* 縮小字體 */
+        font-size: 18px;
+        padding: 12px;
+        display: block;
       }
       
       /* 調整頁首主標題區域 */
@@ -214,6 +240,7 @@
         <h1>月光藍海</h1>
       </div>
       <nav>
+        <div class="menu-toggle">☰</div>
         <ul>
           <li><a href="#intro">旅宿介紹</a></li>
           <li><a href="#rooms">房型資訊</a></li>
@@ -447,7 +474,25 @@
         switchImage(newIndex);
       });
     });
+    
+    // 漢堡選單的 JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      const nav = document.querySelector('nav');
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelectorAll('nav a');
+
+      // 點擊漢堡圖示切換選單顯示狀態
+      menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('active');
+      });
+      
+      // 點擊選單項目後隱藏選單
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('active');
+        });
+      });
+    });
   </script>
 </body>
 </html>
-
