@@ -136,9 +136,9 @@
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
 
-    /* --- 新增漢堡選單樣式 --- */
+    /* --- 漢堡選單樣式 --- */
     .menu-toggle {
-        display: none; /* 預設隱藏 */
+        display: none;
         font-size: 32px;
         line-height: 1;
         cursor: pointer;
@@ -149,7 +149,7 @@
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
       header {
-        padding-top: 24px; /* 調整頁首頂部內距 */
+        padding-top: 24px;
       }
       /* 使用直向圖片 */
       header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
@@ -159,36 +159,40 @@
       
       /* 調整網格佈局 */
       .grid {
-        grid-template-columns: 1fr; /* 將兩欄佈局改為單欄 */
+        grid-template-columns: 1fr;
       }
       
-      /* 漢堡選單顯示，導覽列隱藏 */
+      /* 漢堡選單顯示 */
       .menu-toggle {
         display: block;
         position: absolute;
         right: 16px;
         top: 24px;
-        z-index: 999; /* 提高漢堡圖示層級 */
+        z-index: 999;
       }
       .nav {
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
-        width: 100%; /* 確保橫向充滿 */
+        width: 100%;
+        position: relative; /* 確保 nav 內的 absolute 定位是相對於它 */
       }
+      
+      /* 頂部下拉選單效果 */
       nav {
-        position: fixed;
-        top: 0;
-        left: -100%; /* 預設隱藏在左側 */
-        width: 70%;
-        height: 100%;
-        background-color: rgba(11,37,69,0.9);
-        padding: 80px 24px 24px;
-        transition: left 0.3s ease-in-out;
-        z-index: 999; /* 提高導覽列層級 */
+        position: absolute;
+        top: -100%; /* 初始狀態：隱藏在上方 */
+        left: 0;
+        width: 100%;
+        height: auto;
+        background-color: rgba(11,37,69,0.95);
+        padding: 24px;
+        padding-top: 70px; /* 預留空間給漢堡選單和標題 */
+        transition: top 0.3s ease-in-out;
+        z-index: 99; /* 低於漢堡圖示，避免蓋住 */
       }
       nav.active {
-        left: 0; /* 顯示選單 */
+        top: 0; /* 顯示選單 */
       }
       nav ul {
         flex-direction: column;
@@ -199,9 +203,14 @@
         font-size: 18px;
         padding: 12px;
         display: block;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.08); /* 讓選單項目有淺色背景 */
+      }
+      nav a:hover {
+        background: rgba(255,255,255,0.2);
       }
       .brand h1 {
-        margin-top: 0; /* 修正標題上邊距 */
+        margin-top: 0;
       }
       
       /* 調整頁首主標題區域 */
@@ -209,10 +218,10 @@
         padding: 16px;
       }
       .hero h2 {
-        font-size: 20px; /* 縮小標題字體 */
+        font-size: 20px;
       }
       .hero p {
-        font-size: 14px; /* 縮小段落字體 */
+        font-size: 14px;
       }
       
       /* 調整頁尾佈局 */
