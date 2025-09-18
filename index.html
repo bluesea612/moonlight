@@ -30,11 +30,6 @@
       background-position:center;
       z-index:-1;
     }
-    /* 預設使用全景圖（適用於電腦和橫向平板） */
-    header[data-bg="0"]::before { background-image:url('sunrise.jpg'); }
-    header[data-bg="1"]::before { background-image:url('sea-of-clouds.jpg'); }
-    header[data-bg="2"]::before { background-image:url('sunset.jpg'); }
-    header[data-bg="3"]::before { background-image:url('starry-sky.jpg'); }
     .bg-animated::before {
       animation: pan-3d 60s linear infinite;
     }
@@ -135,7 +130,6 @@
     .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
-
     /* --- 漢堡選單樣式 (隱藏) --- */
     .menu-toggle {
         display: none;
@@ -147,18 +141,9 @@
         padding-top: 15px; /* 調整頁首頂部內距，讓內容更往上 */
         padding-bottom: 15px; /* 調整底部內距 */
       }
-      /* 使用直向圖片 */
-      header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
-      header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
-      header[data-bg="2"]::before { background-image:url('sunset-mobile.jpg'); }
-      header[data-bg="3"]::before { background-image:url('starry-sky-mobile.jpg'); }
-      
-      /* 調整網格佈局 */
       .grid {
         grid-template-columns: 1fr;
       }
-      
-      /* 手機版導覽列直接顯示，並調整樣式 */
       .nav {
         flex-direction: column;
         align-items: flex-start; /* 品牌名稱靠左 */
@@ -189,8 +174,6 @@
         padding: 5px 8px;
         border-radius: 6px;
       }
-      
-      /* 調整頁首主標題區域 */
       .hero {
         margin-top: 10px; /* 與導覽列的間距 */
         padding: 12px; /* 縮小內距 */
@@ -207,8 +190,6 @@
         padding: 4px 10px;
         font-size: 12px;
       }
-
-      /* 調整計時器與按鈕位置 */
       .timer {
         top: 15px; /* 與頁首頂部對齊 */
         right: 16px;
@@ -221,7 +202,7 @@
   </style>
 </head>
 <body>
-  <header class="bg-animated" data-bg="0">
+  <header class="bg-animated">
     <div class="timer">00:00</div>
     <div class="image-nav">
       <button data-index="0" class="active">1</button>
@@ -279,8 +260,8 @@
           <div class="rooms">
             <div class="room">
               <div class="room-gallery">
-                <a href="#" class="img-link" data-img-src="dreamy-seaview-a1.jpg" data-alt="夢幻海景房主圖"><img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖"></a>
-                <a href="#" class="img-link" data-img-src="dreamy-seaview-a2.jpg" data-alt="夢幻海景房夜景"><img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景"></a>
+                <a href="#" class="img-link" data-img-src="dreamy-seaview-a1.jpg" data-alt="夢幻海景房主圖"><picture><source srcset="dreamy-seaview-a1.webp" type="image/webp"><img src="dreamy-seaview-a1.jpg" alt="夢幻海景房主圖"></picture></a>
+                <a href="#" class="img-link" data-img-src="dreamy-seaview-a2.jpg" data-alt="夢幻海景房夜景"><picture><source srcset="dreamy-seaview-a2.webp" type="image/webp"><img src="dreamy-seaview-a2.jpg" alt="夢幻海景房夜景"></picture></a>
               </div>
               <div class="info">
                 <h4>夢幻海景房</h4>
@@ -290,8 +271,8 @@
             </div>
             <div class="room">
               <div class="room-gallery">
-                <a href="#" class="img-link" data-img-src="mountain-ocean-view-b1.jpg" data-alt="山海景觀房主圖"><img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖"></a>
-                <a href="#" class="img-link" data-img-src="mountain-ocean-view-b2.jpg" data-alt="山海景觀房夕陽"><img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽"></a>
+                <a href="#" class="img-link" data-img-src="mountain-ocean-view-b1.jpg" data-alt="山海景觀房主圖"><picture><source srcset="mountain-ocean-view-b1.webp" type="image/webp"><img src="mountain-ocean-view-b1.jpg" alt="山海景觀房主圖"></picture></a>
+                <a href="#" class="img-link" data-img-src="mountain-ocean-view-b2.jpg" data-alt="山海景觀房夕陽"><picture><source srcset="mountain-ocean-view-b2.webp" type="image/webp"><img src="mountain-ocean-view-b2.jpg" alt="山海景觀房夕陽"></picture></a>
               </div>
               <div class="info">
                 <h4>山海景觀房</h4>
@@ -301,8 +282,8 @@
             </div>
             <div class="room">
               <div class="room-gallery">
-                <a href="#" class="img-link" data-img-src="sky-balcony-c1.jpg" data-alt="天空陽台家庭房主圖"><img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖"></a>
-                <a href="#" class="img-link" data-img-src="sky-balcony-c2.jpg" data-alt="天空陽台家庭房夕照"><img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照"></a>
+                <a href="#" class="img-link" data-img-src="sky-balcony-c1.jpg" data-alt="天空陽台家庭房主圖"><picture><source srcset="sky-balcony-c1.webp" type="image/webp"><img src="sky-balcony-c1.jpg" alt="天空陽台家庭房主圖"></picture></a>
+                <a href="#" class="img-link" data-img-src="sky-balcony-c2.jpg" data-alt="天空陽台家庭房夕照"><picture><source srcset="sky-balcony-c2.webp" type="image/webp"><img src="sky-balcony-c2.jpg" alt="天空陽台家庭房夕照"></picture></a>
               </div>
               <div class="info">
                 <h4>天空陽台家庭房</h4>
@@ -422,32 +403,56 @@
         lightbox.classList.remove('open');
       }
     });
-
-    const header = document.querySelector('header');
-    const timerDisplay = document.querySelector('.timer');
-    const imageNavButtons = document.querySelectorAll('.image-nav button');
-    const images = ['sunrise.jpg', 'sea-of-clouds.jpg', 'sunset.jpg', 'starry-sky.jpg'];
+    const images = ['sunrise', 'sea-of-clouds', 'sunset', 'starry-sky'];
     const totalTimePerImage = 60;
-
     let currentImageIndex = 0;
     let timerInterval;
     let timeLeft = totalTimePerImage;
-
     function formatTime(seconds) {
       const min = Math.floor(seconds / 60).toString().padStart(2, '0');
       const sec = (seconds % 60).toString().padStart(2, '0');
       return `${min}:${sec}`;
     }
-
     function switchImage(index) {
       currentImageIndex = index;
-      header.setAttribute('data-bg', currentImageIndex);
-      imageNavButtons.forEach(button => {
+      document.querySelector('header').style.backgroundImage = `url(${images[currentImageIndex]}.jpg)`;
+      document.querySelector('header').setAttribute('data-bg', currentImageIndex);
+      document.querySelectorAll('.image-nav button').forEach(button => {
         button.classList.remove('active');
       });
-      imageNavButtons[currentImageIndex].classList.add('active');
+      document.querySelectorAll('.image-nav button')[currentImageIndex].classList.add('active');
+      
+      const headerBackground = document.querySelector('header::before');
+      const isMobile = window.innerWidth <= 768;
+      
+      const newImageSrc = isMobile
+        ? (currentImageIndex === 1 ? 'sea-clouds-mobile' : images[currentImageIndex] + '-mobile')
+        : images[currentImageIndex];
+      
+      const headerBefore = document.querySelector('header');
+      const headerBeforeStyle = document.createElement('style');
+      headerBeforeStyle.innerHTML = `
+        header[data-bg="${currentImageIndex}"]::before { 
+          background-image: url('${newImageSrc}.jpg');
+        }
+        @supports (background-image: url('${newImageSrc}.webp')) {
+          header[data-bg="${currentImageIndex}"]::before { 
+            background-image: url('${newImageSrc}.webp');
+          }
+        }
+        @media (max-width: 768px) {
+          header[data-bg="${currentImageIndex}"]::before {
+             background-image: url('${newImageSrc}.jpg');
+          }
+          @supports (background-image: url('${newImageSrc}.webp')) {
+            header[data-bg="${currentImageIndex}"]::before { 
+              background-image: url('${newImageSrc}.webp');
+            }
+          }
+        }
+      `;
+      document.head.appendChild(headerBeforeStyle);
     }
-
     function updateTimer() {
       timeLeft--;
       if (timeLeft <= 0) {
@@ -455,18 +460,17 @@
         currentImageIndex = (currentImageIndex + 1) % images.length;
         switchImage(currentImageIndex);
       }
-      timerDisplay.textContent = formatTime(timeLeft);
+      document.querySelector('.timer').textContent = formatTime(timeLeft);
     }
-
-    // 初始化設定並啟動計時器
     switchImage(0);
     timerInterval = setInterval(updateTimer, 1000);
-
-    // 手動切換
-    imageNavButtons.forEach(button => {
+    document.querySelectorAll('.image-nav button').forEach(button => {
       button.addEventListener('click', () => {
         const newIndex = parseInt(button.dataset.index);
+        clearInterval(timerInterval);
+        timeLeft = totalTimePerImage;
         switchImage(newIndex);
+        timerInterval = setInterval(updateTimer, 1000);
       });
     });
   </script>
