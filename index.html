@@ -202,8 +202,9 @@
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
       /* 調整 padding-top 以補償固定導覽列所佔空間 */
+      /* 修正點 2: 將 header 的 padding-top 從 80px 增加到 100px */
       header {
-        padding-top: 80px; 
+        padding-top: 100px; /* 增加到 100px */
         padding-bottom: 15px; 
       }
       /* 導覽列高度調整 */
@@ -236,8 +237,8 @@
         align-items: flex-start; 
         gap: 0; 
         width: 100%;
-        /* 這是關鍵修改：增加 nav.wrap-content 下方的 padding 來推開下方內容 */
-        padding-bottom: 15px; /* 增加這個值以加大導覽列和下方內容的距離 */
+        /* 修正點 1: 增加 nav.wrap-content 下方的 padding 來推開下方內容 */
+        padding-bottom: 20px; /* 從 15px 增加到 20px */
       }
       .brand {
         width: 100%; 
@@ -296,8 +297,8 @@
 
       /* 修正：手機版區塊標題被固定導覽列遮蔽問題 */
       #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
-        /* 手機版導覽列通常較矮，但因分成兩行，所以 scroll-margin-top 需要更大 */
-        scroll-margin-top: 130px; /* 給予足夠的偏移，防止重疊 */
+        /* 保持 scroll-margin-top: 130px */
+        scroll-margin-top: 130px; 
       }
     }
   </style>
