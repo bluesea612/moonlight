@@ -90,8 +90,7 @@
     }
     
     .brand{display:flex;align-items:center;gap:12px}
-    /* H1 樣式調整：保留文字，但將字體縮小一半 */
-    /* 修正：將 h1 初始狀態的顏色設為白色，透明度設為 1 */
+    /* 初始狀態下 H1 樣式 - 確保為白色 */
     .brand h1{font-size:11px;margin:0;font-weight:700; color: white; opacity: 1;}
     nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
     nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
@@ -188,6 +187,13 @@
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
 
+    /* --- 修正：區塊標題被固定導覽列遮蔽問題 (Scroll Offset Fix) --- */
+    /* 確保所有目標區塊在捲動到時，不會被固定導覽列遮擋 */
+    #intro, #news, #rooms, #reviews, #deals, #transport, #booking { /* NEW: 加入 #booking */
+        /* 增加一個安全邊距，讓內容標題完全顯示 */
+        scroll-margin-top: 95px; 
+    }
+
     /* --- 漢堡選單樣式 (隱藏) --- */
     .menu-toggle {
         display: none;
@@ -224,36 +230,39 @@
         grid-template-columns: 1fr;
       }
       
-      /* 手機版導覽列直接顯示，並調整樣式 */
+      /* 修正：手機版導覽列內容重疊問題 */
       .nav .wrap-content {
         flex-direction: column;
         align-items: flex-start; 
-        gap: 8px; 
+        gap: 0; /* 移除 flex 項目之間的 gap */
         width: 100%;
+        /* 導覽連結和品牌 Logo 之間增加空間，防止重疊 */
+        padding-bottom: 4px; 
       }
       .brand {
         width: 100%; 
         justify-content: flex-start; 
         padding-left: 10px; 
+        padding-bottom: 5px; /* 在品牌下方增加一些空間 */
       }
       .brand h1 {
         font-size: 14px; 
-        color: white; /* 修正：手機版 h1 確保為白色 */
-        opacity: 1; /* 修正：手機版 h1 確保完全不透明 */
+        color: white; 
+        opacity: 1; 
       }
       nav {
         width: 100%;
       }
       nav ul {
         flex-direction: row;
-        gap: 6px; 
+        gap: 4px; /* 縮小連結間距 */
         justify-content: space-around; 
         flex-wrap: wrap; 
         padding: 0 5px; 
       }
       nav a {
-        font-size: 14px; 
-        padding: 5px 8px;
+        font-size: 13px; /* 略微縮小文字以容納更多內容 */
+        padding: 5px 6px; /* 縮小內邊距 */
         border-radius: 6px;
       }
       
@@ -283,6 +292,12 @@
       .image-nav {
         bottom: 5px;
         right: 16px;
+      }
+
+      /* 修正：手機版區塊標題被固定導覽列遮蔽問題 */
+      #intro, #news, #rooms, #reviews, #deals, #transport, #booking { /* NEW: 加入 #booking */
+        /* 手機版導覽列通常較矮，但因分成兩行，所以 scroll-margin-top 需要更大 */
+        scroll-margin-top: 130px; /* 給予足夠的偏移，防止重疊 */
       }
     }
   </style>
