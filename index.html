@@ -11,10 +11,58 @@
     :root{--accent:#1e90ff;--dark:#0b2545;--muted:#667;--radius:14px;--bg:#f7fafc}
     *{box-sizing:border-box}
     body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg)}
+    
+    /* V5.02.003 NEW: Fixed Navigation Bar Styles */
+    .nav{
+      position: fixed; /* 讓導覽列固定在頂部 */
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px; 
+      background: transparent; /* 初始背景透明 */
+      transition: background 0.3s ease-out, padding 0.3s ease-out; /* 平滑過渡效果 */
+      z-index: 1000; /* 確保它在最上層 */
+    }
+    /* NEW: 導覽列內部內容置中 */
+    .nav .wrap-content {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      max-width:1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    /* NEW: 捲動後的導覽列樣式 - 內邊距維持 5px */
+    .nav.nav-scrolled {
+      background: rgba(11,37,69, 0.95); /* 捲動後變為實色深藍 */
+      padding-top: 5px;  /* 維持 5px */
+      padding-bottom: 5px; /* 維持 5px */
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    /* V5.02.003 NEW: 捲動後連結文字縮小 */
+    .nav.nav-scrolled nav a {
+        font-size: 13px; /* 縮小文字 */
+        padding: 3px 8px; /* 縮小連結項目的內邊距 */
+    }
+    /* V5.02.003 NEW: 捲動後品牌 Logo/文字調整 - 顏色修正 */
+    .nav.nav-scrolled .brand svg {
+        width: 30px; /* 縮小 Logo 圖示 */
+        height: 30px;
+    }
+    .nav.nav-scrolled .brand h1 {
+        font-size: 10px; /* 微幅縮小 H1 文字 */
+        color: white; /* 修正：確保文字顏色為白色 */
+        opacity: 1; /* 確保完全不透明 */
+    }
+
     header{
+      /* 調整 padding-top 以補償固定導覽列所佔空間 */
+      padding-top: 100px; 
       background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5));
       color:#fff;
-      padding:40px 16px;
+      padding-left: 16px; 
+      padding-right: 16px;
+      padding-bottom: 40px; 
       overflow:hidden;
       position:relative;
       perspective:1600px;
@@ -40,10 +88,11 @@
     .bg-animated::before {
       animation: pan-3d 60s linear infinite;
     }
-    .nav{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;position:relative;z-index:10;}
+    
     .brand{display:flex;align-items:center;gap:12px}
     /* H1 樣式調整：保留文字，但將字體縮小一半 */
-    .brand h1{font-size:11px;margin:0;font-weight:700; opacity: 0.9;}
+    /* 修正：將 h1 初始狀態的顏色設為白色，透明度設為 1 */
+    .brand h1{font-size:11px;margin:0;font-weight:700; color: white; opacity: 1;}
     nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
     nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
     nav a:hover{background:rgba(255,255,255,0.1)}
@@ -94,7 +143,7 @@
     }
     .timer {
       position: absolute;
-      top: 20px; /* 調整為從頂部定位 */
+      top: 20px; 
       right: 16px;
       background: transparent;
       color: white;
@@ -146,10 +195,24 @@
     
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
+      /* 調整 padding-top 以補償固定導覽列所佔空間 */
       header {
-        padding-top: 15px; /* 調整頁首頂部內距，讓內容更往上 */
-        padding-bottom: 15px; /* 調整底部內距 */
+        padding-top: 80px; 
+        padding-bottom: 15px; 
       }
+      /* 導覽列高度調整 */
+      .nav {
+        padding: 10px; 
+      }
+      .nav.nav-scrolled {
+        padding-top: 8px; 
+        padding-bottom: 8px;
+      }
+      .nav.nav-scrolled nav a { 
+        font-size: 14px; 
+        padding: 5px 8px;
+      }
+
       /* 使用直向圖片 */
       header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
       header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
@@ -162,49 +225,50 @@
       }
       
       /* 手機版導覽列直接顯示，並調整樣式 */
-      .nav {
+      .nav .wrap-content {
         flex-direction: column;
-        align-items: flex-start; /* 品牌名稱靠左 */
-        gap: 8px; /* 調整整體間距 */
+        align-items: flex-start; 
+        gap: 8px; 
         width: 100%;
-        margin-bottom: 15px; /* 導覽列和英雄區塊間距 */
       }
       .brand {
-        width: 100%; /* 確保品牌區塊佔滿寬度 */
-        justify-content: flex-start; /* 品牌圖示和標題靠左 */
-        padding-left: 10px; /* 從左邊緣稍微內縮 */
+        width: 100%; 
+        justify-content: flex-start; 
+        padding-left: 10px; 
       }
       .brand h1 {
-        font-size: 14px; /* 手機版 H1 字體也需調整，避免過大 */
+        font-size: 14px; 
+        color: white; /* 修正：手機版 h1 確保為白色 */
+        opacity: 1; /* 修正：手機版 h1 確保完全不透明 */
       }
       nav {
         width: 100%;
       }
       nav ul {
         flex-direction: row;
-        gap: 6px; /* 選單項目間距縮小 */
-        justify-content: space-around; /* 均勻分散 */
-        flex-wrap: wrap; /* 允許換行 */
-        padding: 0 5px; /* 左右稍微內縮 */
+        gap: 6px; 
+        justify-content: space-around; 
+        flex-wrap: wrap; 
+        padding: 0 5px; 
       }
       nav a {
-        font-size: 14px; /* 選單字體縮小 */
+        font-size: 14px; 
         padding: 5px 8px;
         border-radius: 6px;
       }
       
       /* 調整頁首主標題區域 */
       .hero {
-        margin-top: 10px; /* 與導覽列的間距 */
-        padding: 12px; /* 縮小內距 */
+        margin-top: 10px; 
+        padding: 12px; 
       }
       .hero h2 {
-        font-size: 18px; /* 縮小主標題字體 */
+        font-size: 18px; 
         margin-top: 6px;
         margin-bottom: 2px;
       }
       .hero p {
-        font-size: 13px; /* 縮小段落字體 */
+        font-size: 13px; 
       }
       .hero .tag {
         padding: 4px 10px;
@@ -213,7 +277,7 @@
 
       /* 調整計時器與按鈕位置 */
       .timer {
-        top: 15px; /* 與頁首頂部對齊 */
+        top: 15px; 
         right: 16px;
       }
       .image-nav {
@@ -224,15 +288,9 @@
   </style>
 </head>
 <body>
-  <header class="bg-animated" data-bg="0">
-    <div class="timer">00:00</div>
-    <div class="image-nav">
-      <button data-index="0" class="active">1</button>
-      <button data-index="1">2</button>
-      <button data-index="2">3</button>
-      <button data-index="3">4</button>
-    </div>
-    <div class="nav">
+  
+  <div class="nav">
+    <div class="wrap-content">
       <div class="brand">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="white" opacity="0.12"/><path d="M3 12c0-4 4-8 9-8s9 4 9 8-4 8-9 8S3 16 3 12z" stroke="white" stroke-width="0.8" fill="none"/></svg>
         <h1>月光藍海 (網站設計中..請靜候)</h1>
@@ -249,10 +307,19 @@
         </ul>
       </nav>
     </div>
+  </div>
+  <header class="bg-animated" data-bg="0">
+    <div class="timer">00:00</div>
+    <div class="image-nav">
+      <button data-index="0" class="active">1</button>
+      <button data-index="1">2</button>
+      <button data-index="2">3</button>
+      <button data-index="3">4</button>
+    </div>
     <div class="hero">
       <span class="tag">海岸民宿</span>
       <h2 style="margin:8px 0 4px;font-weight:700">桃花島海景住宿推薦：在月光與藍海間，遇見永恆的詩意</h2>
-      <p style="margin:0;color:rgba(255,255,255,0.9)">迎**桃花島**第一道曙光，見最後一顆星辰。我們以千萬等級打造溫馨海景居所，主打四境（日出、雲海、夕陽、星空）絕美景觀，讓每位旅人留下絕美回憶~不負此行滿載而歸。</p>
+      <p style="margin:0;color:rgba(255,255,255,0.9)">迎桃花島第一道曙光，見最後一顆星辰。我們以千萬等級打造溫馨海景居所，主打四境（日出、雲海、夕陽、星空）絕美景觀。讓每位旅人留下絕美回憶~不負此行滿載而歸。</p>
     </div>
   </header>
   <main>
@@ -260,7 +327,7 @@
       <div>
         <article class="card" id="intro">
           <h3>月光藍海：桃花島海景民宿介紹</h3>
-          <p>「月光藍海」坐落於**桃花島海岸線**最佳觀景點，每一刻都是自然與心靈的對話。陽光灑落在深藍海面，波光粼粼，寧靜而浪漫。這裡遠離喧囂，迎日出而醒，隨夕陽而眠，雲海之上，仰望星空。**我們以千萬等級裝潢**，提供進口寢具、獨立衛浴與貼心服務。「月光藍海」誠摯邀約您享受**桃花島海景**的寧靜及尊榮住宿體驗，尋得屬於自己的永恆片刻。</p>
+          <p>「月光藍海」坐落於桃花島海岸線最佳觀景點，每一刻都是自然與心靈的對話。陽光灑落在深藍海面，波光粼粼，寧靜而浪漫。這裡遠離喧囂，迎日出而醒，隨夕陽而眠，雲海之上，仰望星空。我們以千萬等級裝潢，提供進口寢具、獨立衛浴與貼心服務。「月光藍海」誠摯邀約您享受桃花島海景的寧靜及尊榮住宿體驗，尋得屬於自己的永恆片刻。</p>
         </article>
         
         <article class="card" id="news" style="margin-top:18px">
@@ -269,12 +336,12 @@
             <li>
               <strong>年度奇景 — 桃花島月光海觀賞預告</strong>
               <time>2025-09-14</time>
-              <p style="margin:6px 0 0">晴朗少雲的夜晚，您將有機會欣賞到「月光海」。不定期公布最佳觀賞日期與**專屬攝影行程**建議。</p>
+              <p style="margin:6px 0 0">晴朗少雲的夜晚，您將有機會欣賞到「月光海」。不定期公布最佳觀賞日期與專屬攝影行程建議。</p>
             </li>
             <li>
               <strong>環保倡議：自備盥洗用品享優惠</strong>
               <time>2025-09-14</time>
-              <p style="margin:6px 0 0">響應地球永續，我們提供補充式沐浴乳與洗髮乳，**自備**牙刷與牙膏者可獲得**咖啡折價券**。</p>
+              <p style="margin:6px 0 0">響應地球永續，我們提供補充式沐浴乳與洗髮乳，自備牙刷與牙膏者可獲得咖啡折價券。</p>
             </li>
           </ul>
         </article>
@@ -289,8 +356,8 @@
               </div>
               <div class="info">
                 <h4>夢幻海景房（熱門情侶套房）</h4>
-                <p>**180度廣闊海景**，適合情侶或好友入住。房內配有頂級寢具與專屬海景窗，享受寧靜浪漫的**桃花島海邊**假期。</p>
-                <p style="margin-top:6px;color:var(--muted)">價格：NT$3,600 起（含**在地特色早餐**）</p>
+                <p>180度廣闊海景，適合情侶或好友入住。房內配有頂級寢具與專屬海景窗，享受寧靜浪漫的桃花島海邊假期。</p>
+                <p style="margin-top:6px;color:var(--muted)">價格：NT$3,600 起（含在地特色早餐）</p>
               </div>
             </div>
             <div class="room">
@@ -300,7 +367,7 @@
               </div>
               <div class="info">
                 <h4>山海景觀房</h4>
-                <p>適合家人或好友入住。房內備有舒適單人床兩張，可彈性加床。讓您同時享受**桃花島**的綠意山景與蔚藍海景。</p>
+                <p>適合家人或好友入住。房內備有舒適單人床兩張，可彈性加床。讓您同時享受桃花島的綠意山景與蔚藍海景。</p>
                 <p style="margin-top:6px;color:var(--muted)">價格：NT$4,800 起（含早餐）</p>
               </div>
             </div>
@@ -311,7 +378,7 @@
               </div>
               <div class="info">
                 <h4>天空陽台家庭房</h4>
-                <p>專為家庭或朋友團體設計。專屬陽台與浴缸，擁綠意庭院景觀，房內備有舒適雙人床兩張。最適合慶祝紀念日與浪漫**桃花島**假期。</p>
+                <p>專為家庭或朋友團體設計。專屬陽台與浴缸，擁綠意庭院景觀，房內備有舒適雙人床兩張。最適合慶祝紀念日與浪漫桃花島假期。</p>
                 <p style="margin-top:6px;color:var(--muted)">價格：NT$6,600 起（含早餐）</p>
               </div>
             </div>
@@ -333,7 +400,7 @@
         
         <article class="card" id="transport" style="margin-top:18px">
           <h3>桃花島月光藍海交通指引與地圖</h3>
-          <p>**月光藍海**位於**桃花島**，距離主要車站約 10 分鐘車程。可預約接駁服務或自行開車前往，民宿提供免費停車位，步行 5 分鐘即可到達**絕美海岸線**。</p>
+          <p>月光藍海位於桃花島，距離主要車站約 10 分鐘車程。可預約接駁服務或自行開車前往，民宿提供免費停車位，步行 5 分鐘即可到達絕美海岸線。</p>
           <div class="map" style="margin-top:10px">
             <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!2m..." allowfullscreen></iframe>
           </div>
@@ -349,6 +416,7 @@
             <input type="tel" id="phone" name="手機" required placeholder="請輸入手機號碼">
             <label for="email-input">您的 Email</label>
             <input type="email" id="email-input" name="Email" required placeholder="example@gmail.com">
+            <input type="hidden" name="_replyto" value="email">
             <label for="checkin">入住日期</label>
             <input type="date" id="checkin" name="入住日期" required>
             <label for="checkout">退房日期</label>
@@ -388,12 +456,12 @@
     <div class="wrap">
       <div class="footer-col">
         <h4>月光藍海民宿（桃花島）</h4>
-        <p>地址：**桃花島**山高水長路途遙遠612號（範例）<br>電話：01-xxxxxxx / 手機：09xx-xxx-xxx</p>
+        <p>地址：桃花島山高水長路途遙遠612號（範例）<br>電話：01-xxxxxxx / 手機：09xx-xxx-xxx</p>
       </div>
       <div class="footer-col">
         <h4>快速連結</h4>
         <ul style="padding-left:18px;color:#c8d7f5">
-          <li><a href="#rooms" style="color:inherit">查看所有**海景房型資訊**</a></li>
+          <li><a href="#rooms" style="color:inherit">查看所有海景房型資訊</a></li>
           <li><a href="#deals" style="color:inherit">當季優惠方案</a></li>
           <li><a href="#booking" style="color:inherit">線上預訂桃花島住宿</a></li>
         </ul>
@@ -475,6 +543,21 @@
         switchImage(newIndex);
       });
     });
+
+    // V5.02.003 NEW: 背景透明度變化特效
+    const nav = document.querySelector('.nav');
+    const SCROLL_THRESHOLD = 50; // 捲動超過 50 像素後變色
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > SCROLL_THRESHOLD) {
+            // 捲動超過閾值，加上變色 class
+            nav.classList.add('nav-scrolled');
+        } else {
+            // 捲動回頂部，移除變色 class
+            nav.classList.remove('nav-scrolled');
+        }
+    });
+
   </script>
 </body>
 </html>
