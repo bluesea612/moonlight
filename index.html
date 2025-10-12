@@ -44,11 +44,11 @@
         font-size: 13px; /* 縮小文字 */
         padding: 3px 8px; /* 縮小連結項目的內邊距 */
     }
-    /* V5.02.003 NEW: 捲動後品牌 Logo/文字調整 - 顏色修正 */
-    .nav.nav-scrolled .brand svg {
-        width: 30px; /* 縮小 Logo 圖示 */
-        height: 30px;
+    /* V5.03.005 UPDATE: 移除捲動後 SVG 相關樣式，改為圖片 */
+    .nav.nav-scrolled .brand svg { 
+        display: none; /* 隱藏舊的 SVG，確保不會干擾 */
     }
+    /* V5.03.005 UPDATE: 捲動後品牌 Logo/文字調整 - 顏色修正 */
     .nav.nav-scrolled .brand h1 {
         font-size: 10px; /* 微幅縮小 H1 文字 */
         color: white; /* 修正：確保文字顏色為白色 */
@@ -92,6 +92,20 @@
     .brand{display:flex;align-items:center;gap:12px}
     /* 初始狀態下 H1 樣式 - 確保為白色 */
     .brand h1{font-size:11px;margin:0;font-weight:700; color: white; opacity: 1;}
+    /* V5.03.005 NEW: Logo 圖片樣式 */
+    .brand-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%; /* 確保圖片顯示為圓形 */
+        object-fit: cover; /* 確保圖片填滿圓形區域 */
+        transition: width 0.3s ease-out, height 0.3s ease-out; /* 平滑縮放 */
+    }
+    /* V5.03.005 NEW: 捲動後 Logo 圖片縮小 */
+    .nav.nav-scrolled .brand-logo {
+        width: 30px;
+        height: 30px;
+    }
+
     nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
     nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
     nav a:hover{background:rgba(255,255,255,0.1)}
@@ -343,8 +357,8 @@
   <div class="nav">
     <div class="wrap-content">
       <div class="brand">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="white" opacity="0.12"/><path d="M3 12c0-4 4-8 9-8s9 4 9 8-4 8-9 8S3 16 3 12z" stroke="white" stroke-width="0.8" fill="none"/></svg>
-        <h1>月光藍海 (網站設計中..請靜候 V5.03.004)</h1>
+        <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
+        <h1>月光藍海 (網站設計中.. V5.03.005)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -640,7 +654,7 @@
     });
     
     // =========================================================================
-    // V5.04.001 / V5.03.004 表單邏輯與驗證
+    // V5.04.001 / V5.03.004 / V5.03.005 表單邏輯與驗證
     // =========================================================================
 
     // 1. 價格定義 (平日基本價)
@@ -702,7 +716,7 @@
         }
     }
 
-    // B. V5.04.001 NEW: 表單前端驗證函數 (沿用 V5.04.001 邏輯)
+    // B. 表單前端驗證函數 (沿用 V5.04.001 邏輯)
     function validateForm(event) {
         const checkin = checkinDateInput.value;
         const checkout = checkoutDateInput.value;
