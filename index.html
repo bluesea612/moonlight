@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>桃花島月光藍海 | 獨享海景住宿推薦，日出夕陽最佳民宿 (V5.03.007)</title>
+    <title>桃花島月光藍海 | 獨享海景住宿推薦，日出夕陽最佳民宿 (V5.03.006)</title>
     <meta name="description" content="桃花島月光藍海提供千萬級海景房，讓您迎日出、賞雲海、觀星空。立即預訂享受寧靜、浪漫的海岸假期。">
 
     <style>
@@ -251,21 +251,16 @@
             display: none;
         }
         
-        /* === V5.03.007 UPDATE: 跑馬燈樣式調整 === */
+        /* === V5.03.006 NEW: 跑馬燈樣式 === */
         #marqueePlaceholder {
-            /* 移除 min-height，讓跑馬燈高度完全由 .marquee-container 控制 */
-            min-height: 0; 
+             min-height: 20px; 
         }
 
         .marquee-container {
-            /* V5.03.007 調整: 背景改為淡藍色 */
-            background-color: #e6f7ff; 
-            color: #0b2545; 
-            /* V5.03.007 調整: 內邊距減少 (高度變小) */
-            padding: 5px 0; 
-            /* 讓文字垂直置中 */
-            line-height: 20px; 
-            margin-bottom: 15px; /* 與下方內容隔開，減少到 15px */
+            background-color: #ffeb3b; /* 醒目的黃色背景 */
+            color: #0b2545; /* 深藍色文字 */
+            padding: 10px 0;
+            margin-bottom: 25px; /* 與下方內容隔開 */
             overflow: hidden; 
             white-space: nowrap; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -273,8 +268,7 @@
 
         .marquee-content {
             display: inline-block; 
-            /* V5.03.007 調整: 增加秒數 (從 25s 改為 40s)，速度變慢 */
-            animation: marquee-scroll 40s linear infinite; 
+            animation: marquee-scroll 25s linear infinite; /* 動畫設定 */
             padding-left: 100%; /* 從容器右側開始 */
         }
 
@@ -291,8 +285,8 @@
 
         .marquee-content span {
             font-weight: bold;
-            font-size: 14px; /* 可以考慮微調字體大小，讓整體看起來更小巧 */
-            margin-right: 50px; 
+            font-size: 16px;
+            margin-right: 50px; /* 每個公告間的間隔 */
         }
         /* === 跑馬燈樣式結束 === */
 
@@ -313,7 +307,7 @@
             }
             .nav.nav-scrolled nav a { 
                 font-size: 14px; 
-                padding: 5px 6px;
+                padding: 5px 8px;
             }
 
             /* 使用直向圖片 */
@@ -403,7 +397,7 @@
         <div class="wrap-content">
             <div class="brand">
                 <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-                <h1>月光藍海 (網站設計中.. V5.03.007)</h1>
+                <h1>月光藍海 (網站設計中.. V5.03.006)</h1>
             </div>
             <div class="menu-toggle">☰</div>
             <nav>
@@ -518,11 +512,10 @@
             </div>
             <aside class="sidebar">
                 <div class="card" id="booking">
-                    <div id="marqueePlaceholder">
-                    </div>
-                    
                     <h3>線上訂房需求單</h3>
 
+                    <div id="marqueePlaceholder">
+                        </div>
                     <form class="booking-form" id="bookingForm" action="https://formspree.io/f/mblabdyr" method="POST">
                         <label for="name">您的姓名</label>
                         <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
@@ -705,13 +698,13 @@
         });
         
         // =========================================================================
-        // V5.03.007 UPDATE: 跑馬燈渲染邏輯
-        // 渲染時，檢查是否有速度變數 (MARQUEE_SCROLL_DELAY_MS)，並更新 CSS 動畫速度
+        // V5.03.006 新增：跑馬燈渲染邏輯
         // =========================================================================
         function renderMarquee() {
             const placeholder = document.getElementById('marqueePlaceholder');
             
             // 檢查 marqueeMessages 變數是否存在 (來自 marquee_content.js)
+            // 這是關鍵，必須確保外部 JS 文件已載入
             if (typeof marqueeMessages !== 'undefined' && Array.isArray(marqueeMessages) && marqueeMessages.length > 0) {
                 
                 // 構建跑馬燈的 HTML 結構
@@ -723,33 +716,16 @@
 
                 placeholder.innerHTML = `
                     <div class="marquee-container">
-                        <div class="marquee-content" id="marquee-content-inner">
+                        <div class="marquee-content">
                             ${contentHTML}
                         </div>
                     </div>
                 `;
-                
-                // V5.03.007 速度控制：如果 marquee_content.js 提供了延遲參數，則覆寫 CSS 動畫時長
-                // 注意：這裡假設一個 40s 的基礎速度，並與延遲參數做一個簡易的聯動
-                if (typeof MARQUEE_SCROLL_DELAY_MS !== 'undefined') {
-                    const baseDuration = 40; // 基礎秒數 (在 CSS 中定義)
-                    // 假設延遲時間 (MS) 越大，總滾動秒數 (S) 越長 (越慢)
-                    const newDuration = baseDuration * (MARQUEE_SCROLL_DELAY_MS / 100); 
-                    const marqueeInner = document.getElementById('marquee-content-inner');
-                    
-                    if (marqueeInner) {
-                       // 覆寫 CSS 動畫時長 (將速度變慢)
-                       marqueeInner.style.animationDuration = `${newDuration}s`;
-                       console.log(`[V5.03.007] 跑馬燈速度更新為 ${newDuration.toFixed(1)}s (較慢)`);
-                    }
-                }
             } else {
                  // 如果沒有內容，則不顯示任何東西
                  placeholder.innerHTML = '';
             }
         }
-        // 在 DOM 載入完成後渲染跑馬燈
-        renderMarquee();
         
 
         // =========================================================================
@@ -776,78 +752,101 @@
         function calculateNights(checkin, checkout) {
             const checkinDate = new Date(checkin);
             const checkoutDate = new Date(checkout);
+
+            if (isNaN(checkinDate) || isNaN(checkoutDate)) {
+                return 0;
+            }
+
+            const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+            const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
             
-            // ... (計算邏輯繼續)
-            const diffTime = Math.abs(checkoutDate - checkinDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            
-            // 確保退房日期晚於入住日期
-            if (diffDays <= 0) return 1; 
-            return diffDays;
+            return nights > 0 ? nights : 0;
         }
 
-        // 核心函數：計算並更新總價
-        function updateTotal() {
+        // A. 即時總金額計算函數
+        function updateBookingTotal() {
             const checkin = checkinDateInput.value;
             const checkout = checkoutDateInput.value;
-            const selectedRoomKey = roomSelect.options[roomSelect.selectedIndex].dataset.priceKey;
+            const isShuttleSelected = addonShuttle.checked;
             
-            let total = 0;
+            const selectedOption = roomSelect.options[roomSelect.selectedIndex];
+            const selectedRoomKey = selectedOption.getAttribute('data-price-key');
+
             const nights = calculateNights(checkin, checkout);
+            let subtotal = 0;
 
-            if (selectedRoomKey && prices[selectedRoomKey] && nights > 0) {
-                // 基礎房費
-                total += prices[selectedRoomKey] * nights;
+            if (nights > 0 && prices[selectedRoomKey]) {
+                subtotal = prices[selectedRoomKey] * nights;
             }
 
-            // 加購服務費用
-            if (addonShuttle.checked) {
-                total += prices.Shuttle;
-            }
+            let addonFee = isShuttleSelected ? prices.Shuttle : 0;
+            const total = subtotal + addonFee;
 
-            // 更新顯示
-            bookingTotalDisplay.textContent = `NT$ ${total.toLocaleString()}`;
+            const formattedTotal = total.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+            
+            if (total > 0) {
+                bookingTotalDisplay.textContent = formattedTotal;
+            } else {
+                bookingTotalDisplay.textContent = 'NT$ 0';
+            }
         }
 
-        // 3. 綁定事件監聽器
-        [checkinDateInput, checkoutDateInput, roomSelect, addonShuttle].forEach(element => {
-            element.addEventListener('change', updateTotal);
-        });
-
-        // 初始化總價顯示
-        updateTotal();
-
-        // 4. 表單提交時的日期驗證 (基本邏輯)
-        bookingForm.addEventListener('submit', function(e) {
+        // B. 表單前端驗證函數 (沿用 V5.03.005 邏輯)
+        function validateForm(event) {
             const checkin = checkinDateInput.value;
             const checkout = checkoutDateInput.value;
-            
+
+            // 如果日期欄位沒有填寫，讓瀏覽器原生 required 提示處理 (HTML required 屬性)
             if (!checkin || !checkout) {
-                alert('請完整填寫入住日期和退房日期。');
-                e.preventDefault();
-                return;
+                return true; 
             }
 
             const checkinDate = new Date(checkin);
             const checkoutDate = new Date(checkout);
             const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            // 驗證：退房日期必須晚於入住日期
-            if (checkoutDate <= checkinDate) {
-                alert('退房日期必須晚於入住日期。請重新選擇！');
-                e.preventDefault();
-                return;
+            // 為了只比較日期，將今天的時間部分歸零
+            today.setHours(0, 0, 0, 0); 
+            
+            // 1. 檢查入住日期是否是過去的日期
+            if (checkinDate.getTime() < today.getTime()) {
+                alert('❌ 入住日期不能選擇今天或過去的日期，請重新選擇。');
+                event.preventDefault(); // 阻止表單提交
+                return false;
             }
 
-            // 驗證：入住日期不能早於今天
-            if (checkinDate < today) {
-                alert('入住日期不能早於今天。請重新選擇！');
-                e.preventDefault();
-                return;
+            // 2. 檢查退房日期是否晚於入住日期
+            if (checkoutDate.getTime() <= checkinDate.getTime()) {
+                alert('❌ 退房日期必須晚於入住日期，請確認您的住宿天數。');
+                event.preventDefault(); // 阻止表單提交
+                return false;
             }
 
-            // 驗證通過，表單將會被提交到 formspree
+            // 3. 檢查是否至少住一晚
+            const nights = calculateNights(checkin, checkout);
+            if (nights < 1) {
+                alert('❌ 系統偵測到入住晚數不足一晚，請確認日期選擇是否正確。');
+                event.preventDefault(); // 阻止表單提交
+                return false;
+            }
+
+            // 所有驗證通過，允許提交
+            return true;
+        }
+
+
+        // 3. 綁定事件監聽器
+        checkinDateInput.addEventListener('change', updateBookingTotal);
+        checkoutDateInput.addEventListener('change', updateBookingTotal);
+        roomSelect.addEventListener('change', updateBookingTotal);
+        addonShuttle.addEventListener('change', updateBookingTotal);
+        
+        // 綁定表單提交事件
+        bookingForm.addEventListener('submit', validateForm);
+        
+        // V5.03.006 NEW: 確保在頁面載入時運行跑馬燈渲染和價格計算
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBookingTotal();
+            renderMarquee();
         });
 
     </script>
