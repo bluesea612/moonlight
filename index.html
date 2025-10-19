@@ -3,25 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>桃花島月光藍海 | 獨享海景住宿推薦，日出夕陽最佳民宿 (V5.03.008)</title>
+    <title>桃花島月光藍海 | 獨享海景住宿推薦，日出夕陽最佳民宿 (V5.03.010)</title>
     <meta name="description" content="桃花島月光藍海提供千萬級海景房，讓您迎日出、賞雲海、觀星空。立即預訂享受寧靜、浪漫的海岸假期。">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap');
         :root{--accent:#1e90ff;--dark:#0b2545;--muted:#667;--radius:14px;--bg:#f7fafc}
         *{box-sizing:border-box}
-        body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg)}
+        /* V5.03.009 FIX: 新增 overflow-x: hidden 確保頁面不會出現水平捲軸 */
+        body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg); overflow-x: hidden;}
+        
+        /* V5.03.009 NEW: 確保所有圖片和 iframe 不會超過其父容器寬度，解決溢出問題 */
+        img, iframe {
+            max-width: 100%; 
+            height: auto; 
+            display: block; 
+        }
         
         /* V5.02.003 NEW: Fixed Navigation Bar Styles */
         .nav{
-            position: fixed; /* 讓導覽列固定在頂部 */
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
             padding: 16px; 
-            background: transparent; /* 初始背景透明 */
-            transition: background 0.3s ease-out, padding 0.3s ease-out; /* 平滑過渡效果 */
-            z-index: 1000; /* 確保它在最上層 */
+            background: transparent; 
+            transition: background 0.3s ease-out, padding 0.3s ease-out; 
+            z-index: 1000; 
         }
         /* NEW: 導覽列內部內容置中 */
         .nav .wrap-content {
@@ -34,25 +42,25 @@
         }
         /* NEW: 捲動後的導覽列樣式 - 內邊距維持 5px */
         .nav.nav-scrolled {
-            background: rgba(11,37,69, 0.95); /* 捲動後變為實色深藍 */
-            padding-top: 5px;  /* 維持 5px */
-            padding-bottom: 5px; /* 維持 5px */
+            background: rgba(11,37,69, 0.95); 
+            padding-top: 5px; 
+            padding-bottom: 5px; 
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
         /* V5.02.003 NEW: 捲動後連結文字縮小 */
         .nav.nav-scrolled nav a {
-            font-size: 13px; /* 縮小文字 */
-            padding: 3px 8px; /* 縮小連結項目的內邊距 */
+            font-size: 13px; 
+            padding: 3px 8px; 
         }
         /* V5.03.005 UPDATE: 移除捲動後 SVG 相關樣式，改為圖片 */
         .nav.nav-scrolled .brand svg { 
-            display: none; /* 隱藏舊的 SVG，確保不會干擾 */
+            display: none; 
         }
         /* V5.03.005 UPDATE: 捲動後品牌 Logo/文字調整 - 顏色修正 */
         .nav.nav-scrolled .brand h1 {
-            font-size: 10px; /* 微幅縮小 H1 文字 */
-            color: white; /* 修正：確保文字顏色為白色 */
-            opacity: 1; /* 確保完全不透明 */
+            font-size: 10px; 
+            color: white; 
+            opacity: 1; 
         }
 
         header{
@@ -96,9 +104,9 @@
         .brand-logo {
             width: 48px;
             height: 48px;
-            border-radius: 50%; /* 確保圖片顯示為圓形 */
-            object-fit: cover; /* 確保圖片填滿圓形區域 */
-            transition: width 0.3s ease-out, height 0.3s ease-out; /* 平滑縮放 */
+            border-radius: 50%; 
+            object-fit: cover; 
+            transition: width 0.3s ease-out, height 0.3s ease-out; 
         }
         /* V5.03.005 NEW: 捲動後 Logo 圖片縮小 */
         .nav.nav-scrolled .brand-logo {
@@ -139,7 +147,7 @@
         footer h4{margin-top:0;font-weight:600;color:#fff}
         .booking-form{display:flex;flex-direction:column;gap:10px;margin-top:12px}
         .booking-form label{font-size:14px;font-weight:600;color:var(--dark)}
-        .booking-form input,.booking-form select,.booking-form textarea{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit} /* 新增 textarea 樣式 */
+        .booking-form input,.booking-form select,.booking-form textarea{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit} 
         .booking-form button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
         .booking-form button:hover{background:#176fcd}
         
@@ -155,7 +163,7 @@
             height: 18px;
         }
         .addon-item label {
-            font-weight: 400; /* 讓加購服務的標籤字體輕一點 */
+            font-weight: 400; 
             color: #444;
             font-size: 14px;
             display: flex;
@@ -164,7 +172,7 @@
         }
         /* V5.03.002 NEW: 總計金額樣式 */
         .total-display {
-            background: #e6f0ff; /* 淺藍色背景，突出顯示 */
+            background: #e6f0ff; 
             padding: 12px;
             border-radius: 8px;
             margin-top: 15px;
@@ -240,9 +248,7 @@
         .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
 
         /* --- 修正：區塊標題被固定導覽列遮蔽問題 (Scroll Offset Fix) --- */
-        /* 確保所有目標區塊在捲動到時，不會被固定導覽列遮擋 */
         #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
-            /* 增加一個安全邊距，讓內容標題完全顯示 */
             scroll-margin-top: 95px; 
         }
 
@@ -251,32 +257,28 @@
             display: none;
         }
         
-        /* === V5.03.007 UPDATE: 跑馬燈樣式調整 === */
+        /* === V5.03.010 UPDATE: 跑馬燈樣式修正（顏色恢復淡藍色） === */
         #marqueePlaceholder {
-            /* 移除 min-height，讓跑馬燈高度完全由 .marquee-container 控制 */
             min-height: 0; 
         }
 
         .marquee-container {
-            /* V5.03.007 調整: 背景改為淡藍色 */
+            /* V5.03.010 FIX: 恢復淡藍色 */
             background-color: #e6f7ff; 
             color: #0b2545; 
-            /* V5.03.007 調整: 內邊距減少 (高度變小) */
             padding: 5px 0; 
-            /* 讓文字垂直置中 */
             line-height: 20px; 
-            margin-bottom: 15px; /* 與下方內容隔開，減少到 15px */
+            margin-bottom: 15px; 
             overflow: hidden; 
             white-space: nowrap; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            cursor: pointer; /* V5.03.008 NEW: 新增滑鼠指示，提示可暫停 */
+            cursor: pointer; 
         }
 
         .marquee-content {
             display: inline-block; 
-            /* V5.03.007 調整: 增加秒數 (從 25s 改為 40s)，速度變慢 */
             animation: marquee-scroll 40s linear infinite; 
-            padding-left: 100%; /* 從容器右側開始 */
+            padding-left: 100%; 
         }
 
         /* 確保內容在 hover (滑鼠移上去) 時暫停 */
@@ -292,7 +294,7 @@
 
         .marquee-content span {
             font-weight: bold;
-            font-size: 14px; /* 可以考慮微調字體大小，讓整體看起來更小巧 */
+            font-size: 14px; 
             margin-right: 50px; 
         }
         /* === 跑馬燈樣式結束 === */
@@ -398,20 +400,18 @@
             
             /* --- V5.03.008 NEW: 跑馬燈手機版專屬優化 --- */
             .marquee-container {
-                padding: 8px 0; /* 增加垂直內邊距，避免文字太貼邊 */
-                line-height: 18px; /* 稍微調整行高 */
-                margin-bottom: 10px; /* 減少與下方內容的間距 */
+                padding: 8px 0; 
+                line-height: 18px; 
+                margin-bottom: 10px; 
             }
             
             .marquee-content {
-                /* 手機上強制將速度設為 60s，確保在窄螢幕上不會太快 */
-                /* 由於 JS 會設置內聯樣式，這裡使用 !important 來確保 RWD 優先權 */
                 animation-duration: 60s !important; 
             }
 
             .marquee-content span {
-                font-size: 13px; /* 縮小字體以增加可讀空間 */
-                margin-right: 30px; /* 縮小訊息間隔 */
+                font-size: 13px; 
+                margin-right: 30px; 
             }
             /* --- V5.03.008 NEW: 跑馬燈優化結束 --- */
         }
@@ -423,7 +423,7 @@
         <div class="wrap-content">
             <div class="brand">
                 <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-                <h1>月光藍海 (網站設計中.. V5.03.008)</h1>
+                <h1>月光藍海 (網站設計中.. V5.03.010)</h1>
             </div>
             <div class="menu-toggle">☰</div>
             <nav>
@@ -726,7 +726,6 @@
         
         // =========================================================================
         // V5.03.007 UPDATE: 跑馬燈渲染邏輯
-        // V5.03.008 NOTE: 保留 JS 速度計算邏輯，讓 CSS RWD 覆蓋手機版速度。
         // =========================================================================
         function renderMarquee() {
             const placeholder = document.getElementById('marqueePlaceholder');
@@ -750,7 +749,6 @@
                 `;
                 
                 // V5.03.007 速度控制：如果 marquee_content.js 提供了延遲參數，則覆寫 CSS 動畫時長
-                // V5.03.008 NOTE: CSS RWD 區塊已使用 !important 覆蓋手機版速度
                 if (typeof MARQUEE_SCROLL_DELAY_MS !== 'undefined') {
                     const baseDuration = 40; // 基礎秒數 (在 CSS 中定義)
                     // 假設延遲時間 (MS) 越大，總滾動秒數 (S) 越長 (越慢)
@@ -760,7 +758,7 @@
                     if (marqueeInner) {
                        // 覆寫 CSS 動畫時長 (將速度變慢)
                        marqueeInner.style.animationDuration = `${newDuration}s`;
-                       console.log(`[V5.03.008] 跑馬燈速度更新為 ${newDuration.toFixed(1)}s`);
+                       console.log(`[V5.03.010] 跑馬燈速度更新為 ${newDuration.toFixed(1)}s`);
                     }
                 }
             } else {
