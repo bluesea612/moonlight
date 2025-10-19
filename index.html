@@ -1,4 +1,445 @@
-<h2 style="margin:8px 0 4px;font-weight:700">桃花島海景住宿推薦：在月光與藍海間，遇見永恆的詩意</h2>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>桃花島月光藍海 | 獨享海景住宿推薦，日出夕陽最佳民宿</title>
+  <meta name="description" content="桃花島月光藍海提供千萬級海景房，讓您迎日出、賞雲海、觀星空。立即預訂享受寧靜、浪漫的海岸假期。">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap');
+    :root{
+        --accent:#1e90ff;
+        --dark:#0b2545;
+        --muted:#667;
+        --radius:14px;
+        --bg:#f7fafc;
+        --marquee-speed: 25s; /* V5.03.005U NEW: 跑馬燈速度變數 */
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Noto Sans TC',sans-serif;margin:0;color:#222;background:var(--bg)}
+    
+    /* V5.02.003 NEW: Fixed Navigation Bar Styles */
+    .nav{
+      position: fixed; /* 讓導覽列固定在頂部 */
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px; 
+      background: transparent; /* 初始背景透明 */
+      transition: background 0.3s ease-out, padding 0.3s ease-out; /* 平滑過渡效果 */
+      z-index: 1000; /* 確保它在最上層 */
+    }
+    /* NEW: 導覽列內部內容置中 */
+    .nav .wrap-content {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      max-width:1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    /* NEW: 捲動後的導覽列樣式 - 內邊距維持 5px */
+    .nav.nav-scrolled {
+      background: rgba(11,37,69, 0.95); /* 捲動後變為實色深藍 */
+      padding-top: 5px;  /* 維持 5px */
+      padding-bottom: 5px; /* 維持 5px */
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    /* V5.02.003 NEW: 捲動後連結文字縮小 */
+    .nav.nav-scrolled nav a {
+        font-size: 13px; /* 縮小文字 */
+        padding: 3px 8px; /* 縮小連結項目的內邊距 */
+    }
+    /* V5.03.005 UPDATE: 移除捲動後 SVG 相關樣式，改為圖片 */
+    .nav.nav-scrolled .brand svg { 
+        display: none; /* 隱藏舊的 SVG，確保不會干擾 */
+    }
+    /* V5.03.005 UPDATE: 捲動後品牌 Logo/文字調整 - 顏色修正 */
+    .nav.nav-scrolled .brand h1 {
+        font-size: 10px; /* 微幅縮小 H1 文字 */
+        color: white; /* 修正：確保文字顏色為白色 */
+        opacity: 1; /* 確保完全不透明 */
+    }
+
+    header{
+      /* 調整 padding-top 以補償固定導覽列所佔空間 */
+      /* V5.03.005U UPDATE: 跑馬燈移位後，header只需考慮導覽列高度 */
+      padding-top: 80px; 
+      background:linear-gradient(180deg, rgba(11,37,69,0.9), rgba(11,37,69,0.5));
+      color:#fff;
+      padding-left: 16px; 
+      padding-right: 16px;
+      padding-bottom: 40px; 
+      overflow:hidden;
+      position:relative;
+      perspective:1600px;
+      perspective-origin: center center;
+      height: auto;
+    }
+    header::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-size:cover;
+      background-position:center;
+      z-index:-1;
+    }
+    /* 預設使用全景圖（適用於電腦和橫向平板） */
+    header[data-bg="0"]::before { background-image:url('sunrise.jpg'); }
+    header[data-bg="1"]::before { background-image:url('sea-of-clouds.jpg'); }
+    header[data-bg="2"]::before { background-image:url('sunset.jpg'); }
+    header[data-bg="3"]::before { background-image:url('starry-sky.jpg'); }
+    .bg-animated::before {
+      animation: pan-3d 60s linear infinite;
+    }
+    
+    .brand{display:flex;align-items:center;gap:12px}
+    /* 初始狀態下 H1 樣式 - 確保為白色 */
+    .brand h1{font-size:11px;margin:0;font-weight:700; color: white; opacity: 1;}
+    /* V5.03.005 NEW: Logo 圖片樣式 */
+    .brand-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%; /* 確保圖片顯示為圓形 */
+        object-fit: cover; /* 確保圖片填滿圓形區域 */
+        transition: width 0.3s ease-out, height 0.3s ease-out; /* 平滑縮放 */
+    }
+    /* V5.03.005 NEW: 捲動後 Logo 圖片縮小 */
+    .nav.nav-scrolled .brand-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
+    nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
+    nav a:hover{background:rgba(255,255,255,0.1)}
+    .hero{
+      max-width:1200px;
+      margin:32px auto 0;
+      padding:24px;
+      background:rgba(0,0,0,0.25);
+      border-radius:12px;
+      position:relative;
+      z-index:10;
+    }
+    .hero .tag{background:rgba(255,255,255,0.18);display:inline-block;padding:6px 12px;border-radius:20px;font-size:14px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1200px;margin:32px auto;padding:0 16px}
+    .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(10,20,30,0.07)}
+    .card h3{margin-top:0;font-weight:600;color:var(--dark)}
+    .news-list li{margin-bottom:14px}
+    .news-list time{display:block;color:var(--muted);font-size:13px}
+    .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+    .room{overflow:hidden;border-radius:12px;background:#fff;display:flex;flex-direction:column}
+    .room-gallery{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;height:180px;overflow:hidden}
+    .room-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+    .room .info{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+    .room h4{margin:0 0 8px;font-size:18px;font-weight:600;color:var(--dark)}
+    .sidebar .book-btn{display:block;background:var(--accent);color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:600}
+    .sidebar h3,.sidebar h4{margin-top:0;color:var(--dark)}
+    .map{width:100%;height:220px;border-radius:10px;overflow:hidden}
+    footer{background:#07122a;color:#cbdcec;padding:32px 16px;margin-top:36px}
+    footer .wrap{max-width:1200px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap}
+    .footer-col{flex:1;min-width:220px}
+    footer h4{margin-top:0;font-weight:600;color:#fff}
+    .booking-form{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .booking-form label{font-size:14px;font-weight:600;color:var(--dark)}
+    .booking-form input,.booking-form select,.booking-form textarea{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit} /* 新增 textarea 樣式 */
+    .booking-form button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+    .booking-form button:hover{background:#176fcd}
+
+    /* V5.03.002 NEW: 加購服務樣式 */
+    .addon-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .addon-item input[type="checkbox"] {
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+    }
+    .addon-item label {
+        font-weight: 400; /* 讓加購服務的標籤字體輕一點 */
+        color: #444;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    /* V5.03.002 NEW: 總計金額樣式 */
+    .total-display {
+        background: #e6f0ff; /* 淺藍色背景，突出顯示 */
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 700;
+        color: var(--dark);
+        border: 1px solid var(--accent);
+    }
+    .total-amount {
+        font-size: 20px;
+        color: var(--accent);
+    }
+
+    /* V5.03.005U NEW: Marquee Section Styles (跑馬燈樣式) */
+    .marquee-section {
+        background: #e6f0ff; /* 淡藍色背景 */
+        color: var(--dark);
+        padding: 6px 12px; /* 調整高度，使其更小 */
+        overflow: hidden; /* 隱藏溢出的文字 */
+        white-space: nowrap; /* 確保內容顯示在同一行 */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        font-size: 14px;
+        border-radius: var(--radius); /* 配合卡片圓角 */
+        margin-bottom: 18px; /* 與下方卡片保持距離 */
+    }
+    .marquee-content {
+        display: inline-block; /* 讓內容可以被動畫 */
+        padding-left: 100%; /* 從螢幕右側開始 */
+        animation: marquee-scroll var(--marquee-speed) linear infinite; /* 使用CSS變數控制速度 */
+        animation-delay: 1s; /* 稍微延遲後開始第一次滾動 */
+    }
+    .marquee-content span {
+        margin-right: 40px; /* 訊息間距 */
+        display: inline-block; /* 確保每個訊息獨立佔用空間 */
+    }
+    /* V5.03.005U NEW: 跑馬燈動畫 */
+    @keyframes marquee-scroll {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-150%); } /* 滾動到左側，確保所有內容都通過 */
+    }
+    /* V5.03.005U NEW: 滑鼠懸停時暫停動畫 (良好使用者體驗) */
+    .marquee-content:hover {
+        animation-play-state: paused;
+    }
+
+    /* --- 頁首背景3D環繞動畫 --- */
+    @keyframes pan-3d {
+      0% {
+        transform: translateZ(0) rotateY(0deg);
+      }
+      75% {
+        transform: translateZ(0) rotateY(-360deg);
+      }
+      100% {
+        transform: translateZ(0) rotateY(-360deg);
+      }
+    }
+    .timer {
+      position: absolute;
+      top: 20px; 
+      right: 16px;
+      background: transparent;
+      color: white;
+      padding: 0;
+      border-radius: 0;
+      font-size: 14px;
+      z-index: 100;
+      font-weight: bold;
+      text-align: right;
+    }
+    .image-nav {
+      position: absolute;
+      bottom: 5px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      padding-bottom: 5px;
+    }
+    .image-nav button {
+      background: rgba(255,255,255,0.3);
+      border: none;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      color: white;
+      font-size: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-nav button:hover, .image-nav button.active {
+      background: rgba(255,255,255,0.7);
+    }
+    /* --- 燈箱效果 --- */
+    .room-gallery a{cursor:zoom-in;display:block}
+    .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0s 0.2s}
+    .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
+    .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
+    .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
+
+    /* --- 修正：區塊標題被固定導覽列遮蔽問題 (Scroll Offset Fix) --- */
+    /* 確保所有目標區塊在捲動到時，不會被固定導覽列遮擋 */
+    #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
+        /* 增加一個安全邊距，讓內容標題完全顯示 */
+        scroll-margin-top: 95px; 
+    }
+
+    /* --- 漢堡選單樣式 (隱藏) --- */
+    .menu-toggle {
+        display: none;
+    }
+    
+    /* === 手機版響應式優化（768px 以下）=== */
+    @media (max-width: 768px) {
+      /* 調整 padding-top 以補償固定導覽列所佔空間 */
+      header {
+        /* V5.03.005U UPDATE: 跑馬燈移位後，header只需考慮導覽列高度 */
+        padding-top: 80px; 
+        padding-bottom: 15px; 
+      }
+      /* 導覽列高度調整 */
+      .nav {
+        padding: 10px; 
+      }
+      .nav.nav-scrolled {
+        padding-top: 8px; 
+        padding-bottom: 8px;
+      }
+      .nav.nav-scrolled nav a { 
+        font-size: 14px; 
+        padding: 5px 8px;
+      }
+
+      /* V5.03.005U NEW: 跑馬燈在手機上的樣式調整 */
+      .marquee-section {
+          font-size: 12px;
+          padding: 5px 10px; /* 進一步縮小手機版高度 */
+          margin-bottom: 15px; /* 與下方卡片保持距離 */
+      }
+      .marquee-content {
+          animation-duration: var(--marquee-speed); /* 保持使用變數 */
+      }
+      .marquee-content span {
+          margin-right: 25px;
+      }
+
+      /* 使用直向圖片 */
+      header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
+      header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
+      header[data-bg="2"]::before { background-image:url('sunset-mobile.jpg'); }
+      header[data-bg="3"]::before { background-image:url('starry-sky-mobile.jpg'); }
+      
+      /* 調整網格佈局 */
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      /* 修正：手機版導覽列與內容距離 */
+      .nav .wrap-content {
+        flex-direction: column;
+        align-items: flex-start; 
+        gap: 0; 
+        width: 100%;
+        padding-bottom: 20px; 
+      }
+      .brand {
+        width: 100%; 
+        justify-content: flex-start; 
+        padding-left: 10px; 
+        padding-bottom: 5px; 
+      }
+      .brand h1 {
+        font-size: 14px; 
+        color: white; 
+        opacity: 1; 
+      }
+      nav {
+        width: 100%;
+      }
+      nav ul {
+        flex-direction: row;
+        gap: 4px; 
+        justify-content: space-around; 
+        flex-wrap: wrap; 
+        padding: 0 5px; 
+      }
+      nav a {
+        font-size: 13px; 
+        padding: 5px 6px; 
+        border-radius: 6px;
+      }
+      
+      /* 調整頁首主標題區域 */
+      .hero {
+        margin-top: 10px; 
+        padding: 12px; 
+      }
+      .hero h2 {
+        font-size: 18px; 
+        margin-top: 6px;
+        margin-bottom: 2px;
+      }
+      .hero p {
+        font-size: 13px; 
+      }
+      .hero .tag {
+        padding: 4px 10px;
+        font-size: 12px;
+      }
+
+      /* 調整計時器與按鈕位置 */
+      .timer {
+        top: 15px; 
+        right: 16px;
+      }
+      .image-nav {
+        bottom: 5px;
+        right: 16px;
+      }
+
+      /* 修正：手機版區塊標題被固定導覽列遮蔽問題 */
+      #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
+        scroll-margin-top: 130px; 
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="nav">
+    <div class="wrap-content">
+      <div class="brand">
+        <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
+        <h1>月光藍海 (網站設計中.. V5.03.005U)</h1> <!-- 更新版本號 -->
+      </div>
+      <div class="menu-toggle">☰</div>
+      <nav>
+        <ul>
+          <li><a href="#intro">旅宿介紹</a></li>
+          <li><a href="#rooms">房型資訊</a></li>
+          <li><a href="#reviews">口碑好評</a></li>
+          <li><a href="#deals">優惠方案</a></li>
+          <li><a href="#transport">交通指引</a></li>
+          <li><a href="#booking">線上訂房</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <header class="bg-animated" data-bg="0">
+    <div class="timer">00:00</div>
+    <div class="image-nav">
+      <button data-index="0" class="active">1</button>
+      <button data-index="1">2</button>
+      <button data-index="2">3</button>
+      <button data-index="3">4</button>
+    </div>
+    <div class="hero">
+      <span class="tag">海岸民宿</span>
+      <
+	  <h2 style="margin:8px 0 4px;font-weight:700">桃花島海景住宿推薦：在月光與藍海間，遇見永恆的詩意</h2>
       <p style="margin:0;color:rgba(255,255,255,0.9)">我們以四境(日出、夕陽、雲海、星空)書寫不朽之美。千萬等級打造溫馨山海景觀居所(桃花島月光藍海)，讓每位旅人~不負此行滿載而歸。</p>
     </div>
   </header>
