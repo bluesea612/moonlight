@@ -180,7 +180,7 @@
         color: var(--accent);
     }
 
-    /* V5.03.005Gr1 NEW: 跑馬燈樣式 */
+    /* V5.03.006Gr1 UPDATE: 跑馬燈樣式 */
     .marquee-container {
         width: 100%;
         overflow: hidden;
@@ -198,12 +198,38 @@
         font-size: 14px;
         color: var(--dark);
         font-weight: 500;
-        animation: marquee 120s linear infinite; /* 滾動速度120秒 */
+        animation: marquee 30s linear infinite; /* 速度調整為30秒 */
         position: absolute;
+        left: 0; /* 確保刷新時從左側開始 */
         will-change: transform; /* 優化動畫性能 */
     }
+    .marquee-controls {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 4px;
+        z-index: 10;
+    }
+    .marquee-controls button {
+        background: rgba(255,255,255,0.8);
+        border: none;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+    .marquee-controls button:hover {
+        background: rgba(255,255,255,1);
+    }
     @keyframes marquee {
-        0% { transform: translateX(100%); }
+        0% { transform: translateX(0); } /* 從左側開始 */
         100% { transform: translateX(-100%); }
     }
     /* 手機版跑馬燈調整 */
@@ -214,6 +240,11 @@
         }
         .marquee-text {
             font-size: 12px; /* 手機版字體稍小 */
+        }
+        .marquee-controls button {
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
         }
     }
 
@@ -279,8 +310,8 @@
     /* --- 修正：區塊標題被固定導覽列遮蔽問題 (Scroll Offset Fix) --- */
     /* 確保所有目標區塊在捲動到時，不會被固定導覽列遮擋 */
     #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
-        /* 增加一個安全邊距，讓內容標題完全顯示 */
-        scroll-margin-top: 95px; 
+        /* 增加一個安全邊距，讓內容標題完全顯示，考慮跑馬燈高度 */
+        scroll-margin-top: 125px; 
     }
 
     /* --- 漢堡選單樣式 (隱藏) --- */
@@ -307,6 +338,17 @@
         font-size: 14px; 
         padding: 5px 8px;
       }
+      /* V5.03.006Gr1 NEW: 手機端 Logo 文字避免與計時器重疊 */
+      .brand h1 {
+        font-size: 12px; /* 縮小字體 */
+        max-width: 160px; /* 限制寬度 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .timer {
+        z-index: 1100; /* 確保計時器在最上層 */
+      }
 
       /* 使用直向圖片 */
       header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
@@ -332,11 +374,6 @@
         justify-content: flex-start; 
         padding-left: 10px; 
         padding-bottom: 5px; 
-      }
-      .brand h1 {
-        font-size: 14px; 
-        color: white; 
-        opacity: 1; 
       }
       nav {
         width: 100%;
@@ -382,9 +419,9 @@
         right: 16px;
       }
 
-      /* 修正：手機版區塊標題被固定導覽列遮蔽問題 */
+      /* 修正：手機版區塊標題被固定導覽列遮蔽問題，考慮跑馬燈高度 */
       #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
-        scroll-margin-top: 130px; 
+        scroll-margin-top: 160px; 
       }
     }
   </style>
@@ -395,7 +432,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (網站設計中.. V5.03.005Gr1)</h1>
+        <h1>月光藍海 (網站設計中.. V5.03.006Gr1)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -428,6 +465,13 @@
     <section class="grid" aria-label="主要內容">
       <div>
         <article class="card" id="intro">
+          <div class="marquee-container">
+            <span class="marquee-text" id="marquee-text"></span>
+            <div class="marquee-controls">
+              <button id="marquee-pause" title="暫停">⏸</button>
+              <button id="marquee-play" title="繼續" style="display:none;">▶</button>
+            </div>
+          </div>
           <h3>月光藍海：桃花島海景民宿介紹</h3>
           <p>「月光藍海」坐落於桃花島海岸線最佳觀景點，每一刻都是自然與心靈的對話。陽光灑落在深藍海面，波光粼粼，寧靜而浪漫。這裡遠離喧囂，迎日出而醒，隨夕陽而眠，雲海之上，仰望星空。我們以千萬等級裝潢，提供進口寢具、獨立衛浴與貼心服務。「月光藍海」誠摯邀約您享受桃花島海景的寧靜及尊榮住宿體驗，尋得屬於自己的永恆片刻。</p>
         </article>
@@ -511,9 +555,6 @@
       <aside class="sidebar">
         <div class="card" id="booking">
           <h3>線上訂房需求單</h3>
-          <div class="marquee-container">
-            <span class="marquee-text" id="marquee-text"></span>
-          </div>
           <form class="booking-form" id="bookingForm" action="https://formspree.io/f/mblabdyr" method="POST">
             <label for="name">您的姓名</label>
             <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
@@ -693,14 +734,55 @@
         }
     });
     
-    // V5.03.005Gr1 NEW: 跑馬燈動態載入
+    // V5.03.006Gr1 NEW: 跑馬燈動態載入與控制
     document.addEventListener('DOMContentLoaded', () => {
         const marqueeText = document.getElementById('marquee-text');
-        if (typeof marqueeConfig !== 'undefined' && marqueeText) {
-            marqueeText.textContent = marqueeConfig.text;
-            marqueeText.style.color = marqueeConfig.color;
-            marqueeText.style.animationDuration = `${marqueeConfig.speed}s`;
-            marqueeText.parentElement.style.background = marqueeConfig.background;
+        const pauseButton = document.getElementById('marquee-pause');
+        const playButton = document.getElementById('marquee-play');
+        let currentMessageIndex = 0;
+        let marqueeInterval;
+
+        function updateMarquee() {
+            if (typeof marqueeConfig !== 'undefined' && marqueeConfig.messages && marqueeConfig.messages.length > 0) {
+                const message = marqueeConfig.messages[currentMessageIndex];
+                marqueeText.textContent = message.text;
+                marqueeText.style.color = message.color;
+                marqueeText.style.animationDuration = `${message.speed}s`;
+                marqueeText.parentElement.style.background = message.background;
+                // 重置動畫以確保新訊息立即顯示
+                marqueeText.style.animation = 'none';
+                void marqueeText.offsetWidth; // 觸發重繪
+                marqueeText.style.animation = `marquee ${message.speed}s linear infinite`;
+            }
+        }
+
+        function startMarqueeCycle() {
+            if (marqueeConfig.messages.length > 1) {
+                marqueeInterval = setInterval(() => {
+                    currentMessageIndex = (currentMessageIndex + 1) % marqueeConfig.messages.length;
+                    updateMarquee();
+                }, marqueeConfig.cycleInterval * 1000);
+            }
+        }
+
+        if (marqueeText && typeof marqueeConfig !== 'undefined') {
+            updateMarquee();
+            startMarqueeCycle();
+
+            // 暫停/繼續控制
+            pauseButton.addEventListener('click', () => {
+                marqueeText.style.animationPlayState = 'paused';
+                pauseButton.style.display = 'none';
+                playButton.style.display = 'flex';
+                clearInterval(marqueeInterval);
+            });
+
+            playButton.addEventListener('click', () => {
+                marqueeText.style.animationPlayState = 'running';
+                pauseButton.style.display = 'flex';
+                playButton.style.display = 'none';
+                startMarqueeCycle();
+            });
         }
     });
     
@@ -808,7 +890,6 @@
         // 所有驗證通過，允許提交
         return true;
     }
-
 
     // 3. 綁定事件監聽器
     checkinDateInput.addEventListener('change', updateBookingTotal);
