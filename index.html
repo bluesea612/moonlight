@@ -180,6 +180,43 @@
         color: var(--accent);
     }
 
+    /* V5.03.005Gr1 NEW: 跑馬燈樣式 */
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        background: #e6f0ff; /* 淡藍色背景 */
+        border-radius: 8px;
+        margin-bottom: 12px;
+        height: 28px; /* 較小的顯示框高度 */
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .marquee-text {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 14px;
+        color: var(--dark);
+        font-weight: 500;
+        animation: marquee 120s linear infinite; /* 滾動速度120秒 */
+        position: absolute;
+        will-change: transform; /* 優化動畫性能 */
+    }
+    @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    /* 手機版跑馬燈調整 */
+    @media (max-width: 768px) {
+        .marquee-container {
+            height: 24px; /* 手機版高度再縮小 */
+            margin-bottom: 10px;
+        }
+        .marquee-text {
+            font-size: 12px; /* 手機版字體稍小 */
+        }
+    }
+
     /* --- 頁首背景3D環繞動畫 --- */
     @keyframes pan-3d {
       0% {
@@ -358,7 +395,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (網站設計中.. V5.03.005)</h1>
+        <h1>月光藍海 (網站設計中.. V5.03.005Gr1)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -474,7 +511,9 @@
       <aside class="sidebar">
         <div class="card" id="booking">
           <h3>線上訂房需求單</h3>
-          
+          <div class="marquee-container">
+            <span class="marquee-text" id="marquee-text"></span>
+          </div>
           <form class="booking-form" id="bookingForm" action="https://formspree.io/f/mblabdyr" method="POST">
             <label for="name">您的姓名</label>
             <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
@@ -571,6 +610,7 @@
     <span class="close">×</span>
     <img src="" alt="">
   </div>
+  <script src="marquee_content.js"></script>
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});});
     const lightbox = document.getElementById('lightbox');
@@ -650,6 +690,17 @@
         } else {
             // 捲動回頂部，移除變色 class
             nav.classList.remove('nav-scrolled');
+        }
+    });
+    
+    // V5.03.005Gr1 NEW: 跑馬燈動態載入
+    document.addEventListener('DOMContentLoaded', () => {
+        const marqueeText = document.getElementById('marquee-text');
+        if (typeof marqueeConfig !== 'undefined' && marqueeText) {
+            marqueeText.textContent = marqueeConfig.text;
+            marqueeText.style.color = marqueeConfig.color;
+            marqueeText.style.animationDuration = `${marqueeConfig.speed}s`;
+            marqueeText.parentElement.style.background = marqueeConfig.background;
         }
     });
     
