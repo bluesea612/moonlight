@@ -139,7 +139,7 @@
     footer h4{margin-top:0;font-weight:600;color:#fff}
     .booking-form{display:flex;flex-direction:column;gap:10px;margin-top:12px}
     .booking-form label{font-size:14px;font-weight:600;color:var(--dark)}
-    .booking-form input,.booking-form select,.booking-form textarea{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit} /* 新增 textarea 樣式 */
+    .booking-form input,.booking-form select,.booking-form textarea{padding:8px;border:1px solid #ccc;border-radius:8px;font-family:inherit}
     .booking-form button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
     .booking-form button:hover{background:#176fcd}
 
@@ -155,7 +155,7 @@
         height: 18px;
     }
     .addon-item label {
-        font-weight: 400; /* 讓加購服務的標籤字體輕一點 */
+        font-weight: 400;
         color: #444;
         font-size: 14px;
         display: flex;
@@ -164,7 +164,7 @@
     }
     /* V5.03.002 NEW: 總計金額樣式 */
     .total-display {
-        background: #e6f0ff; /* 淺藍色背景，突出顯示 */
+        background: #e6f0ff;
         padding: 12px;
         border-radius: 8px;
         margin-top: 15px;
@@ -180,14 +180,14 @@
         color: var(--accent);
     }
 
-    /* V5.03.007Gr1 UPDATE: 跑馬燈樣式 */
+    /* V5.03.008Gr UPDATE: 跑馬燈樣式 */
     .marquee-container {
         width: 100%;
         overflow: hidden;
-        background: #e6f0ff; /* 淡藍色背景 */
+        background: #e6f0ff;
         border-radius: 8px;
         margin-bottom: 12px;
-        height: 28px; /* 較小的顯示框高度 */
+        height: 28px;
         display: flex;
         align-items: center;
         position: relative;
@@ -198,10 +198,9 @@
         font-size: 14px;
         color: var(--dark);
         font-weight: 500;
-        animation: marquee 30s linear infinite; /* 速度預設30秒 */
         position: absolute;
-        transform: translateX(50%); /* 文字從容器中段開始 */
-        will-change: transform; /* 優化動畫性能 */
+        transform: translateX(50%);
+        will-change: transform;
     }
     .marquee-controls {
         position: absolute;
@@ -209,7 +208,7 @@
         top: 50%;
         transform: translateY(-50%);
         display: flex;
-        gap: 3px; /* 按鈕間距縮小 */
+        gap: 3px;
         z-index: 10;
     }
     .marquee-controls button {
@@ -228,18 +227,15 @@
     .marquee-controls button:hover {
         background: rgba(255,255,255,1);
     }
-    @keyframes marquee {
-        0% { transform: translateX(50%); } /* 從容器中段開始 */
-        100% { transform: translateX(-100%); }
-    }
+    /* 動態 keyframes 將在 JavaScript 中生成 */
     /* 手機版跑馬燈調整 */
     @media (max-width: 768px) {
         .marquee-container {
-            height: 24px; /* 手機版高度再縮小 */
+            height: 24px;
             margin-bottom: 10px;
         }
         .marquee-text {
-            font-size: 12px; /* 手機版字體稍小 */
+            font-size: 12px;
         }
         .marquee-controls button {
             width: 18px;
@@ -250,15 +246,9 @@
 
     /* --- 頁首背景3D環繞動畫 --- */
     @keyframes pan-3d {
-      0% {
-        transform: translateZ(0) rotateY(0deg);
-      }
-      75% {
-        transform: translateZ(0) rotateY(-360deg);
-      }
-      100% {
-        transform: translateZ(0) rotateY(-360deg);
-      }
+      0% { transform: translateZ(0) rotateY(0deg); }
+      75% { transform: translateZ(0) rotateY(-360deg); }
+      100% { transform: translateZ(0) rotateY(-360deg); }
     }
     .timer {
       position: absolute;
@@ -269,7 +259,7 @@
       padding: 0;
       border-radius: 0;
       font-size: 14px;
-      z-index: 1200; /* 提高 z-index */
+      z-index: 1200;
       font-weight: bold;
       text-align: right;
     }
@@ -307,10 +297,8 @@
     .lightbox img{max-width:90%;max-height:90%;margin:auto;box-shadow:0 0 10px rgba(0,0,0,0.5)}
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
 
-    /* --- 修正：區塊標題被固定導覽列遮蔽問題 (Scroll Offset Fix) --- */
-    /* 確保所有目標區塊在捲動到時，不會被固定導覽列遮擋 */
+    /* --- 修正：區塊標題被固定導覽列遮蔽問題 --- */
     #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
-        /* 考慮跑馬燈高度 */
         scroll-margin-top: 125px; 
     }
 
@@ -321,12 +309,10 @@
     
     /* === 手機版響應式優化（768px 以下）=== */
     @media (max-width: 768px) {
-      /* 調整 padding-top 以補償固定導覽列所佔空間 */
       header {
         padding-top: 100px; 
         padding-bottom: 15px; 
       }
-      /* 導覽列高度調整 */
       .nav {
         padding: 10px; 
       }
@@ -338,33 +324,32 @@
         font-size: 14px; 
         padding: 5px 8px;
       }
-      /* V5.03.007Gr1 NEW: 手機端 Logo 文字避免與計時器重疊 */
+      /* V5.03.008Gr NEW: 手機端 Logo 文字完整顯示 */
       .brand {
-        padding-left: 5px; /* 左移 Logo 和文字 */
+        padding-left: 2px; /* 進一步左移 */
+      }
+      .brand-logo {
+        width: 40px; /* 縮小 Logo */
+        height: 40px;
       }
       .brand h1 {
-        font-size: 12px; /* 縮小字體 */
-        max-width: 160px; /* 限制寬度 */
+        font-size: 12px;
+        max-width: 180px; /* 增加寬度以容納完整文字 */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
       .timer {
-        z-index: 1200; /* 確保計時器在最上層 */
+        z-index: 1200;
       }
-
       /* 使用直向圖片 */
       header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
       header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
       header[data-bg="2"]::before { background-image:url('sunset-mobile.jpg'); }
       header[data-bg="3"]::before { background-image:url('starry-sky-mobile.jpg'); }
-      
-      /* 調整網格佈局 */
       .grid {
         grid-template-columns: 1fr;
       }
-      
-      /* 修正：手機版導覽列與內容距離 */
       .nav .wrap-content {
         flex-direction: column;
         align-items: flex-start; 
@@ -392,8 +377,6 @@
         padding: 5px 6px; 
         border-radius: 6px;
       }
-      
-      /* 調整頁首主標題區域 */
       .hero {
         margin-top: 10px; 
         padding: 12px; 
@@ -410,8 +393,6 @@
         padding: 4px 10px;
         font-size: 12px;
       }
-
-      /* 調整計時器與按鈕位置 */
       .timer {
         top: 15px; 
         right: 16px;
@@ -420,8 +401,6 @@
         bottom: 5px;
         right: 16px;
       }
-
-      /* 修正：手機版區塊標題被固定導覽列遮蔽問題，考慮跑馬燈高度 */
       #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
         scroll-margin-top: 160px; 
       }
@@ -434,7 +413,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (測試中.. V5.03.007Gr1)</h1>
+        <h1>月光藍海 (測試中.. V5.03.008Gr)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -726,19 +705,17 @@
 
     // V5.02.003 NEW: 背景透明度變化特效
     const nav = document.querySelector('.nav');
-    const SCROLL_THRESHOLD = 50; // 捲動超過 50 像素後變色
+    const SCROLL_THRESHOLD = 50;
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > SCROLL_THRESHOLD) {
-            // 捲動超過閾值，加上變色 class
             nav.classList.add('nav-scrolled');
         } else {
-            // 捲動回頂部，移除變色 class
             nav.classList.remove('nav-scrolled');
         }
     });
     
-    // V5.03.007Gr1 NEW: 跑馬燈動態載入與控制
+    // V5.03.008Gr NEW: 跑馬燈動態載入與控制
     document.addEventListener('DOMContentLoaded', () => {
         const marqueeText = document.getElementById('marquee-text');
         const pauseButton = document.getElementById('marquee-pause');
@@ -753,12 +730,28 @@
                 const message = marqueeConfig.messages[currentMessageIndex];
                 marqueeText.textContent = message.text;
                 marqueeText.style.color = message.color;
-                marqueeText.style.animationDuration = `${message.speed}s`;
                 marqueeText.parentElement.style.background = message.background;
-                // 重置動畫以確保新訊息從中段開始
-                marqueeText.style.animation = 'none';
+
+                // 動態計算文字寬度，設置結束點
+                const textWidth = marqueeText.offsetWidth;
+                const containerWidth = marqueeText.parentElement.offsetWidth;
+                const endPosition = -(textWidth + containerWidth); // 文字完全移出容器
+
+                // 動態生成 keyframes
+                const styleSheet = document.styleSheets[0];
+                const keyframeName = `marquee-${currentMessageIndex}`;
+                const keyframeRule = `
+                    @keyframes ${keyframeName} {
+                        0% { transform: translateX(50%); }
+                        100% { transform: translateX(${endPosition}px); }
+                    }
+                `;
+                styleSheet.insertRule(keyframeRule, styleSheet.cssRules.length);
+
+                // 應用動畫
+                marqueeText.style.animation = `none`;
                 void marqueeText.offsetWidth; // 觸發重繪
-                marqueeText.style.animation = `marquee ${message.speed}s linear infinite`;
+                marqueeText.style.animation = `${keyframeName} ${message.speed}s linear infinite`;
             }
         }
 
@@ -815,15 +808,13 @@
     // V5.04.001 / V5.03.004 / V5.03.005 表單邏輯與驗證
     // =========================================================================
 
-    // 1. 價格定義 (平日基本價)
     const prices = {
-        Dreamy: 3600, // 夢幻海景房
-        Mountain: 4800, // 山海景觀房
-        Sky: 6600, // 天空陽台家庭房
-        Shuttle: 600 // 高鐵/車站來回接送服務
+        Dreamy: 3600,
+        Mountain: 4800,
+        Sky: 6600,
+        Shuttle: 600
     };
 
-    // 2. 獲取所有相關 DOM 元素
     const bookingForm = document.getElementById('bookingForm');
     const checkinDateInput = document.getElementById('checkin');
     const checkoutDateInput = document.getElementById('checkout');
@@ -831,103 +822,61 @@
     const addonShuttle = document.getElementById('addon-shuttle');
     const bookingTotalDisplay = document.getElementById('booking-total');
 
-    // Helper 函數：計算入住晚數 (一晚 = 1 天)
     function calculateNights(checkin, checkout) {
         const checkinDate = new Date(checkin);
         const checkoutDate = new Date(checkout);
-
-        if (isNaN(checkinDate) || isNaN(checkoutDate)) {
-            return 0;
-        }
-
+        if (isNaN(checkinDate) || isNaN(checkoutDate)) return 0;
         const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
         const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        
         return nights > 0 ? nights : 0;
     }
 
-    // A. 即時總金額計算函數
     function updateBookingTotal() {
         const checkin = checkinDateInput.value;
         const checkout = checkoutDateInput.value;
         const isShuttleSelected = addonShuttle.checked;
-        
         const selectedOption = roomSelect.options[roomSelect.selectedIndex];
         const selectedRoomKey = selectedOption.getAttribute('data-price-key');
-
         const nights = calculateNights(checkin, checkout);
-        let subtotal = 0;
-
-        if (nights > 0 && prices[selectedRoomKey]) {
-            subtotal = prices[selectedRoomKey] * nights;
-        }
-
+        let subtotal = nights > 0 && prices[selectedRoomKey] ? prices[selectedRoomKey] * nights : 0;
         let addonFee = isShuttleSelected ? prices.Shuttle : 0;
         const total = subtotal + addonFee;
-
-        const formattedTotal = total.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
-        
-        if (total > 0) {
-            bookingTotalDisplay.textContent = formattedTotal;
-        } else {
-            bookingTotalDisplay.textContent = 'NT$ 0';
-        }
+        bookingTotalDisplay.textContent = total > 0 ? total.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }) : 'NT$ 0';
     }
 
-    // B. 表單前端驗證函數 (沿用 V5.04.001 邏輯)
     function validateForm(event) {
         const checkin = checkinDateInput.value;
         const checkout = checkoutDateInput.value;
-
-        // 如果日期欄位沒有填寫，讓瀏覽器原生 required 提示處理 (HTML required 屬性)
-        if (!checkin || !checkout) {
-            return true; 
-        }
-
+        if (!checkin || !checkout) return true;
         const checkinDate = new Date(checkin);
         const checkoutDate = new Date(checkout);
         const today = new Date();
-        // 為了只比較日期，將今天的時間部分歸零
-        today.setHours(0, 0, 0, 0); 
-        
-        // 1. 檢查入住日期是否是過去的日期
+        today.setHours(0, 0, 0, 0);
         if (checkinDate.getTime() < today.getTime()) {
             alert('❌ 入住日期不能選擇今天或過去的日期，請重新選擇。');
-            event.preventDefault(); // 阻止表單提交
+            event.preventDefault();
             return false;
         }
-
-        // 2. 檢查退房日期是否晚於入住日期
         if (checkoutDate.getTime() <= checkinDate.getTime()) {
             alert('❌ 退房日期必須晚於入住日期，請確認您的住宿天數。');
-            event.preventDefault(); // 阻止表單提交
+            event.preventDefault();
             return false;
         }
-
-        // 3. 檢查是否至少住一晚
         const nights = calculateNights(checkin, checkout);
         if (nights < 1) {
             alert('❌ 系統偵測到入住晚數不足一晚，請確認日期選擇是否正確。');
-            event.preventDefault(); // 阻止表單提交
+            event.preventDefault();
             return false;
         }
-
-        // 所有驗證通過，允許提交
         return true;
     }
 
-    // 3. 綁定事件監聽器
     checkinDateInput.addEventListener('change', updateBookingTotal);
     checkoutDateInput.addEventListener('change', updateBookingTotal);
     roomSelect.addEventListener('change', updateBookingTotal);
     addonShuttle.addEventListener('change', updateBookingTotal);
-    
-    // 綁定表單提交事件
     bookingForm.addEventListener('submit', validateForm);
-    
-    // 初始化時計算一次
     document.addEventListener('DOMContentLoaded', updateBookingTotal);
-
   </script>
 </body>
 </html>
