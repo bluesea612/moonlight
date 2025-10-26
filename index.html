@@ -180,7 +180,7 @@
         color: var(--accent);
     }
 
-    /* V5.03.006Gr1 UPDATE: 跑馬燈樣式 */
+    /* V5.03.007Gr1 UPDATE: 跑馬燈樣式 */
     .marquee-container {
         width: 100%;
         overflow: hidden;
@@ -198,9 +198,9 @@
         font-size: 14px;
         color: var(--dark);
         font-weight: 500;
-        animation: marquee 30s linear infinite; /* 速度調整為30秒 */
+        animation: marquee 30s linear infinite; /* 速度預設30秒 */
         position: absolute;
-        left: 0; /* 確保刷新時從左側開始 */
+        transform: translateX(50%); /* 文字從容器中段開始 */
         will-change: transform; /* 優化動畫性能 */
     }
     .marquee-controls {
@@ -209,7 +209,7 @@
         top: 50%;
         transform: translateY(-50%);
         display: flex;
-        gap: 4px;
+        gap: 3px; /* 按鈕間距縮小 */
         z-index: 10;
     }
     .marquee-controls button {
@@ -229,7 +229,7 @@
         background: rgba(255,255,255,1);
     }
     @keyframes marquee {
-        0% { transform: translateX(0); } /* 從左側開始 */
+        0% { transform: translateX(50%); } /* 從容器中段開始 */
         100% { transform: translateX(-100%); }
     }
     /* 手機版跑馬燈調整 */
@@ -269,7 +269,7 @@
       padding: 0;
       border-radius: 0;
       font-size: 14px;
-      z-index: 100;
+      z-index: 1200; /* 提高 z-index */
       font-weight: bold;
       text-align: right;
     }
@@ -310,7 +310,7 @@
     /* --- 修正：區塊標題被固定導覽列遮蔽問題 (Scroll Offset Fix) --- */
     /* 確保所有目標區塊在捲動到時，不會被固定導覽列遮擋 */
     #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
-        /* 增加一個安全邊距，讓內容標題完全顯示，考慮跑馬燈高度 */
+        /* 考慮跑馬燈高度 */
         scroll-margin-top: 125px; 
     }
 
@@ -338,7 +338,10 @@
         font-size: 14px; 
         padding: 5px 8px;
       }
-      /* V5.03.006Gr1 NEW: 手機端 Logo 文字避免與計時器重疊 */
+      /* V5.03.007Gr1 NEW: 手機端 Logo 文字避免與計時器重疊 */
+      .brand {
+        padding-left: 5px; /* 左移 Logo 和文字 */
+      }
       .brand h1 {
         font-size: 12px; /* 縮小字體 */
         max-width: 160px; /* 限制寬度 */
@@ -347,7 +350,7 @@
         white-space: nowrap;
       }
       .timer {
-        z-index: 1100; /* 確保計時器在最上層 */
+        z-index: 1200; /* 確保計時器在最上層 */
       }
 
       /* 使用直向圖片 */
@@ -372,7 +375,6 @@
       .brand {
         width: 100%; 
         justify-content: flex-start; 
-        padding-left: 10px; 
         padding-bottom: 5px; 
       }
       nav {
@@ -432,7 +434,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (網站設計中.. V5.03.006Gr1)</h1>
+        <h1>月光藍海 (測試中.. V5.03.007Gr1)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -468,6 +470,8 @@
           <div class="marquee-container">
             <span class="marquee-text" id="marquee-text"></span>
             <div class="marquee-controls">
+              <button id="marquee-prev" title="上一則">◄</button>
+              <button id="marquee-next" title="下一則">►</button>
               <button id="marquee-pause" title="暫停">⏸</button>
               <button id="marquee-play" title="繼續" style="display:none;">▶</button>
             </div>
@@ -734,11 +738,13 @@
         }
     });
     
-    // V5.03.006Gr1 NEW: 跑馬燈動態載入與控制
+    // V5.03.007Gr1 NEW: 跑馬燈動態載入與控制
     document.addEventListener('DOMContentLoaded', () => {
         const marqueeText = document.getElementById('marquee-text');
         const pauseButton = document.getElementById('marquee-pause');
         const playButton = document.getElementById('marquee-play');
+        const prevButton = document.getElementById('marquee-prev');
+        const nextButton = document.getElementById('marquee-next');
         let currentMessageIndex = 0;
         let marqueeInterval;
 
@@ -749,7 +755,7 @@
                 marqueeText.style.color = message.color;
                 marqueeText.style.animationDuration = `${message.speed}s`;
                 marqueeText.parentElement.style.background = message.background;
-                // 重置動畫以確保新訊息立即顯示
+                // 重置動畫以確保新訊息從中段開始
                 marqueeText.style.animation = 'none';
                 void marqueeText.offsetWidth; // 觸發重繪
                 marqueeText.style.animation = `marquee ${message.speed}s linear infinite`;
@@ -782,6 +788,25 @@
                 pauseButton.style.display = 'flex';
                 playButton.style.display = 'none';
                 startMarqueeCycle();
+            });
+
+            // 手動切換控制
+            prevButton.addEventListener('click', () => {
+                clearInterval(marqueeInterval);
+                currentMessageIndex = (currentMessageIndex - 1 + marqueeConfig.messages.length) % marqueeConfig.messages.length;
+                updateMarquee();
+                if (playButton.style.display === 'none') {
+                    startMarqueeCycle();
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                clearInterval(marqueeInterval);
+                currentMessageIndex = (currentMessageIndex + 1) % marqueeConfig.messages.length;
+                updateMarquee();
+                if (playButton.style.display === 'none') {
+                    startMarqueeCycle();
+                }
             });
         }
     });
