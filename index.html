@@ -280,7 +280,7 @@
     .lightbox .close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;text-decoration:none;z-index:10000;cursor:zoom-out;line-height:1}
     .lightbox .lightbox-content {
       background: #fff;
-      padding: 20px;
+      padding: 15px;
       border-radius: 12px;
       max-width: 600px;
       max-height: 80%;
@@ -488,11 +488,11 @@
           <div class="rooms">
             <div class="room">
               <div class="room-gallery">
-                <a href="#" class="img-link" data-img-src="dreamy-seaview-a1.jpg" data-alt="夢幻海景房：雙人床與 180 度海景窗"><img src="dreamy-seaview-a1.jpg" alt="夢幻海景房：雙人床與 180 度海景窗"></a>
-                <a href="#" class="img-link" data-img-src="dreamy-seaview-a2.jpg" data-alt="夢幻海景房：房間內看見的海岸夜景"><img src="dreamy-seaview-a2.jpg" alt="夢幻海景房：房間內看見的海岸夜景"></a>
+                <a href="#" class="img-link" data-img-src="dreamy-seaview-a1.jpg" data-alt="夢幻山景房：雙人床與 180 度海景窗"><img src="dreamy-seaview-a1.jpg" alt="夢幻山景房：雙人床與 180 度海景窗"></a>
+                <a href="#" class="img-link" data-img-src="dreamy-seaview-a2.jpg" data-alt="夢幻山景房：房間內看見的海岸夜景"><img src="dreamy-seaview-a2.jpg" alt="夢幻山景房：房間內看見的海岸夜景"></a>
               </div>
               <div class="info">
-                <h4>夢幻海景房（熱門情侶套房）</h4>
+                <h4>夢幻山景房</h4>
                 <p>180度廣闊海景，適合情侶或好友入住。房內配有頂級寢具與專屬海景窗，享受寧靜浪漫的桃花島海邊假期。</p>
                 <p style="margin-top:6px;color:var(--muted)">價格：NT$3,600 起（含在地特色早餐）</p>
               </div>
@@ -546,8 +546,7 @@
       <aside class="sidebar">
         <div class="card" id="booking">
           <h3>線上訂房需求單</h3>
-          <!-- 新增訂房須知和入住規定連結 -->
-          <div style="margin: 12px 0; display: flex; gap: 16px;">
+          <div style="margin: 6px 0; display: flex; gap: 16px;">
             <a href="#" class="rules-link" data-target="booking-rules-lightbox">訂房須知</a>
             <a href="#" class="rules-link" data-target="checkin-rules-lightbox">入住規定</a>
           </div>
@@ -566,13 +565,13 @@
             <input type="date" id="checkout" name="退房日期" required>
             
             <p style="margin:5px 0 10px; font-size:13px; color:var(--dark); font-weight:600; padding:8px; background:#f0f6ff; border-radius:6px;">
-                價格參考：夢幻海景房 NT$3,600起 / 山海景觀房 NT$4,800起 / 天空陽台家庭房 NT$6,600起
+                價格參考：夢幻山景房 NT$3,600起 / 山海景觀房 NT$4,800起 / 天空陽台家庭房 NT$6,600起
                 <span style="display:block; font-size:12px; font-weight:400; color:var(--muted); margin-top:4px;">(實際價格以電話/Email確認為準，假日或特殊節日價格可能不同)</span>
             </p>
 
             <label for="room">選擇房型</label>
             <select id="room" name="選擇房型" required>
-              <option value="夢幻海景房" data-price-key="Dreamy">夢幻海景房</option>
+              <option value="夢幻山景房" data-price-key="Dreamy">夢幻山景房</option>
               <option value="山海景觀房" data-price-key="Mountain">山海景觀房</option>
               <option value="天空陽台家庭房" data-price-key="Sky">天空陽台家庭房</option>
             </select>
@@ -643,17 +642,15 @@
       </div>
     </div>
   </footer>
-  <!-- 現有圖片燈箱 -->
   <div id="lightbox" class="lightbox">
     <span class="close">×</span>
     <img src="" alt="">
   </div>
-  <!-- 新增訂房須知燈箱 -->
   <div id="booking-rules-lightbox" class="lightbox">
     <span class="close">×</span>
-    <div class="lightbox-content">
-      <h4 style="margin: 0 0 12px; color: var(--dark);">訂房須知</h4>
-      <ul style="padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6;">
+    <div class="lightbox-content" style="padding: 15px; max-width: 600px; max-height: 80%; overflow-y: auto;">
+      <h4 style="margin: 0 0 8px; color: var(--dark);">訂房須知</h4>
+      <ul style="padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.5;">
         <li>訂房需預付 50% 訂金，入住前 7 天可全額退款。</li>
         <li>假日或旺季價格可能調整，請以確認信為準。</li>
         <li>訂房後 24 小時內完成付款，否則訂單自動取消。</li>
@@ -672,12 +669,11 @@
       </ul>
     </div>
   </div>
-  <!-- 新增入住規定燈箱 -->
   <div id="checkin-rules-lightbox" class="lightbox">
     <span class="close">×</span>
-    <div class="lightbox-content">
-      <h4 style="margin: 0 0 12px; color: var(--dark);">入住規定</h4>
-      <ul style="padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6;">
+    <div class="lightbox-content" style="padding: 15px; max-width: 600px; max-height: 80%; overflow-y: auto;">
+      <h4 style="margin: 0 0 8px; color: var(--dark);">入住規定</h4>
+      <ul style="padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.5;">
         <li>入住時間：15:00 後，退房時間：11:00 前。</li>
         <li>室內全面禁菸，請於指定吸菸區使用。</li>
         <li>禁止攜帶寵物，違者取消訂房資格。</li>
@@ -869,7 +865,6 @@
         Sky: 6600,
         Shuttle: 600
     };
-
     const bookingForm = document.getElementById('bookingForm');
     const checkinDateInput = document.getElementById('checkin');
     const checkoutDateInput = document.getElementById('checkout');
