@@ -118,7 +118,23 @@
     .room-gallery{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;height:180px;overflow:hidden}
     .room-gallery img{width:100%;height:100%;object-fit:cover;display:block}
     .room .info{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
-    .room h4{margin:0 0 8px;font-size:18px;font-weight:600;color:var(--dark)}
+    
+    /* 房型標題改為綠色 */
+    .room h4{margin:0 0 8px;font-size:18px;font-weight:600;color:#008000;}
+    
+    /* 新增樣式以符合截圖排版 */
+    .room-desc {
+        font-size: 14px; 
+        line-height: 1.6;
+    }
+    .room-desc div {
+        margin-bottom: 2px;
+    }
+    .text-red-bold { color: #8b0000; font-weight: 700; }
+    .text-red { color: #8b0000; }
+    .text-blue { color: #4169e1; }
+    .text-gold { color: #808000; }
+
     .sidebar .book-btn{display:block;background:var(--accent);color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:600}
     .sidebar h3,.sidebar h4{margin-top:0;color:var(--dark)}
     .map{width:100%;height:220px;border-radius:10px;overflow:hidden}
@@ -421,7 +437,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (測試中.. V5.03.010Gm)</h1>
+        <h1>月光藍海 (TestNm.. V5.03.012Gm)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -493,8 +509,18 @@
               </div>
               <div class="info">
                 <h4>夢幻山景房</h4>
-                <p>180度廣闊海景，適合情侶或好友入住。房內配有頂級寢具與專屬海景窗，享受寧靜浪漫的桃花島海邊假期。</p>
-                <p style="margin-top:6px;color:var(--muted)">價格：NT$3,600 起（含在地特色早餐）</p>
+                <div class="room-desc">
+                    <div class="text-red-bold">【一樓雙人房】兩中床、可加床 1 張。</div>
+                    <div class="text-blue">平日價(週一～週四)：4800 元。</div>
+                    <div class="text-blue">假日價(週五、週六、週日、國定假日)：5800 元。</div>
+                    <div class="text-blue">冬季(11-3 月)不分假日皆為平日價。</div>
+                    <br>
+                    <div><span class="text-red-bold">【房間主要配備】</span><span class="text-red">13 坪、專屬雙陽台</span></div>
+                    <div class="text-blue">頂級寢具、全套乾溼分離衛浴。</div>
+                    <div class="text-blue">免費 WiFi、冷暖氣機、小冰箱。</div>
+                    <div class="text-blue">吹風機、浴巾、毛巾、熱水壺。</div>
+                    <div class="text-gold">180 度視野讓您享受寧靜浪漫的桃花島海岸假期。</div>
+                </div>
               </div>
             </div>
             <div class="room">
@@ -504,8 +530,18 @@
               </div>
               <div class="info">
                 <h4>山海景觀房</h4>
-                <p>適合家人或好友入住。房內備有舒適單人床兩張，可彈性加床。讓您同時享受桃花島的綠意山景與蔚藍海景。</p>
-                <p style="margin-top:6px;color:var(--muted)">價格：NT$4,800 起（含早餐）</p>
+                <div class="room-desc">
+                    <div class="text-red-bold">【二樓雙人房】兩中床、可加床 1 張。</div>
+                    <div class="text-blue">平日價(週一～週四)：5800 元。</div>
+                    <div class="text-blue">假日價(週五、週六、週日、國定假日)：6800 元。</div>
+                    <div class="text-blue">冬季(11-3 月)不分假日皆為平日價。</div>
+                    <br>
+                    <div><span class="text-red-bold">【房間主要配備】</span><span class="text-red">11 坪、專屬面海景觀陽台</span></div>
+                    <div class="text-blue">頂級寢具、全套乾溼分離衛浴。</div>
+                    <div class="text-blue">免費 WiFi、冷暖氣機、小冰箱。</div>
+                    <div class="text-blue">吹風機、浴巾、毛巾、熱水壺。</div>
+                    <div class="text-gold">270 度視野讓您享受桃花島的綠意山景與蔚藍海景。</div>
+                </div>
               </div>
             </div>
             <div class="room">
@@ -515,8 +551,20 @@
               </div>
               <div class="info">
                 <h4>天空陽台家庭房</h4>
-                <p>專為家庭或朋友團體設計。專屬陽台與浴缸，擁綠意庭院景觀，房內備有舒適雙人床兩張。最適合慶祝紀念日與浪漫桃花島假期。</p>
-                <p style="margin-top:6px;color:var(--muted)">價格：NT$6,600 起（含早餐）</p>
+                <div class="room-desc">
+                    <div class="text-red-bold">【三樓四人房】兩大床、可加床 2 張。</div>
+                    <div class="text-blue">平日價(週一～週四)：7800 元。</div>
+                    <div class="text-blue">假日價(週五、週六、週日、國定假日)：8800 元。</div>
+                    <div class="text-blue">冬季(11-3 月)不分假日皆為平日價。</div>
+                    <br>
+                    <div><span class="text-red-bold">【房間主要配備】</span><span class="text-red">20 坪、專屬山海景觀大陽台視野佳</span></div>
+                    <div class="text-blue">頂級寢具、全套乾溼分離衛浴。</div>
+                    <div class="text-blue">免費 WiFi、冷暖氣機、小冰箱。</div>
+                    <div class="text-blue">吹風機、浴巾、毛巾、熱水壺。</div>
+                    <div class="text-blue">雙面山海景觀落地窗。</div>
+                    <div class="text-blue">VIP 等級獨立客廳。</div>
+                    <div class="text-gold">專屬家庭 VIP 設計綠意庭院山海景觀，共度浪漫桃花島假期。</div>
+                </div>
               </div>
             </div>
           </div>
@@ -539,7 +587,7 @@
           <h3>桃花島月光藍海交通指引與地圖</h3>
           <p>月光藍海位於桃花島，距離主要車站約 10 分鐘車程。可預約接駁服務或自行開車前往，民宿提供免費停車位，步行 5 分鐘即可到達絕美海岸線。</p>
           <div class="map" style="margin-top:10px">
-            <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!2m..." allowfullscreen></iframe>
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5583.768622151789!2d121.93816992912278!3d24.84245268798457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3467f457132d91a7%3A0xae7de614c5fb2319!2z6b6c5bGx5bO26YGK5a6i5pyN5YuZ5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1763717187716!5m2!1szh-TW!2stw" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </article>
       </div>
@@ -565,7 +613,7 @@
             <input type="date" id="checkout" name="退房日期" required>
             
             <p style="margin:5px 0 10px; font-size:13px; color:var(--dark); font-weight:600; padding:8px; background:#f0f6ff; border-radius:6px;">
-                價格參考：夢幻山景房 NT$3,600起 / 山海景觀房 NT$4,800起 / 天空陽台家庭房 NT$6,600起
+                價格參考：夢幻山景房 NT$4,800起 / 山海景觀房 NT$5,800起 / 天空陽台家庭房 NT$7,800起
                 <span style="display:block; font-size:12px; font-weight:400; color:var(--muted); margin-top:4px;">(實際價格以電話/Email確認為準，假日或特殊節日價格可能不同)</span>
             </p>
 
@@ -867,9 +915,9 @@
     });
 
     const prices = {
-        Dreamy: 3600,
-        Mountain: 4800,
-        Sky: 6600,
+        Dreamy: 4800,
+        Mountain: 5800,
+        Sky: 7800,
         Shuttle: 600
     };
     const bookingForm = document.getElementById('bookingForm');
