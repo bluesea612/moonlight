@@ -111,29 +111,70 @@
     .grid{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1200px;margin:32px auto;padding:0 16px}
     .card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px rgba(10,20,30,0.07)}
     .card h3{margin-top:0;font-weight:600;color:var(--dark)}
-    .news-list li{margin-bottom:14px}
-    .news-list time{display:block;color:var(--muted);font-size:13px}
+    .news-list { list-style: none; padding: 0; margin: 0; }
+    .news-list li{margin-bottom:14px; border-bottom: 1px solid #eee; padding-bottom: 14px; }
+    .news-list li:last-child { border-bottom: none; margin-bottom: 0; }
+    .news-list time{display:block;color:var(--muted);font-size:13px; margin-top: 4px;}
+    
     .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
     .room{overflow:hidden;border-radius:12px;background:#fff;display:flex;flex-direction:column}
     .room-gallery{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;height:180px;overflow:hidden}
     .room-gallery img{width:100%;height:100%;object-fit:cover;display:block}
     .room .info{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
     
-    /* 房型標題改為綠色 */
+    /* 房型標題綠色 */
     .room h4{margin:0 0 8px;font-size:18px;font-weight:600;color:#008000;}
     
-    /* 新增樣式以符合截圖排版 */
-    .room-desc {
-        font-size: 14px; 
-        line-height: 1.6;
-    }
-    .room-desc div {
-        margin-bottom: 2px;
-    }
+    .room-desc { font-size: 14px; line-height: 1.6; }
+    .room-desc div { margin-bottom: 2px; }
     .text-red-bold { color: #8b0000; font-weight: 700; }
     .text-red { color: #8b0000; }
     .text-blue { color: #4169e1; }
     .text-gold { color: #808000; }
+
+    /* 共用列表樣式 (優惠與口碑) */
+    .list-container { display: flex; flex-direction: column; gap: 12px; }
+    
+    /* 優惠方案特定樣式 */
+    .deal-item { 
+        display: flex; align-items: flex-start; gap: 12px;
+        background: #fffbf0; border: 1px solid #ffeeba;
+        border-radius: 10px; padding: 12px;
+        transition: transform 0.2s;
+    }
+    .deal-item:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 193, 7, 0.15); }
+    .deal-icon { 
+        font-size: 24px; width: 40px; height: 40px; 
+        background: #fff; border-radius: 50%; 
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05); flex-shrink: 0;
+    }
+    .deal-content h4 { margin: 0 0 4px; font-size: 15px; color: #856404; font-weight: 700; }
+    .deal-content p { margin: 0; font-size: 13px; color: #666; line-height: 1.4; }
+    .highlight-tag { 
+        background: #ff4757; color: white; font-size: 11px; 
+        padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* 口碑好評特定樣式 (圖示化列表，淡色背景) */
+    .review-item {
+        display: flex; align-items: flex-start; gap: 12px;
+        background: #f4f8fb; border: 1px solid #e3eef7; /* 淡藍色系 */
+        border-radius: 10px; padding: 12px;
+        transition: transform 0.2s;
+    }
+    .review-item:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(30, 144, 255, 0.1); }
+    .review-avatar {
+        font-size: 14px; width: 40px; height: 40px;
+        background: #fff; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05); flex-shrink: 0;
+        color: var(--accent); font-weight: 700; border: 2px solid #e3eef7;
+    }
+    .review-content h4 { margin: 0; font-size: 14px; color: var(--dark); font-weight: 700; display: flex; align-items: center; gap: 8px;}
+    .review-stars { font-size: 12px; color: #ffc107; }
+    .review-content p { margin: 4px 0; font-size: 13px; color: #444; line-height: 1.4; font-style: italic;}
+    .review-source { font-size: 11px; color: #889; display: block; margin-top: 2px; }
 
     .sidebar .book-btn{display:block;background:var(--accent);color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:600}
     .sidebar h3,.sidebar h4{margin-top:0;color:var(--dark)}
@@ -437,7 +478,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (TestNm.. V5.03.012Gm)</h1>
+        <h1>月光藍海 (TestM.. V5.03.014Gm)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -463,7 +504,7 @@
     <div class="hero">
       <span class="tag">海岸民宿</span>
       <h2 style="margin:8px 0 4px;font-weight:700">桃花島海景住宿推薦：在月光與藍海間，遇見永恆的詩意</h2>
-      <p style="margin:0;color:rgba(255,255,255,0.9)">我們以四境(日出、夕陽、雲海、星空)書寫不朽之美。千萬等級打造溫馨山海景觀居所(桃花島月光藍海)，讓每位旅人~不負此行滿載而歸。</p>
+      <p style="margin:0;color:rgba(255,255,255,0.9)">我們以四境(日出、雲海、夕陽、星空)書寫不朽之美。千萬等級打造溫馨山海景觀居所(桃花島月光藍海)，讓每位旅人~不負此行滿載而歸。</p>
     </div>
   </header>
   <main>
@@ -484,19 +525,9 @@
         </article>
         
         <article class="card" id="news" style="margin-top:18px">
-          <h3>月光藍海民宿最新消息與旅遊資訊</h3>
-          <ul class="news-list">
-            <li>
-              <strong>年度奇景 — 桃花島月光海觀賞預告</strong>
-              <time>2025-09-14</time>
-              <p style="margin:6px 0 0">晴朗少雲的夜晚，您將有機會欣賞到「月光海」。不定期公布最佳觀賞日期與專屬攝影行程建議。</p>
-            </li>
-            <li>
-              <strong>環保倡議：自備盥洗用品享優惠</strong>
-              <time>2025-09-14</time>
-              <p style="margin:6px 0 0">響應地球永續，我們提供補充式沐浴乳與洗髮乳，自備牙刷與牙膏者可獲得咖啡折價券。</p>
-            </li>
-          </ul>
+          <h3>最新消息與旅遊資訊</h3>
+          <ul class="news-list" id="news-container">
+            </ul>
         </article>
         
         <article class="card" id="rooms" style="margin-top:18px">
@@ -569,18 +600,17 @@
             </div>
           </div>
         </article>
+        
         <article class="card" id="reviews" style="margin-top:18px">
-          <h3>口碑好評</h3>
-          <blockquote style="margin:0;padding:14px;border-left:4px solid #eee;background:#fafafa;border-radius:8px">「月光海真是美，千萬價格等級打造全新民宿，高檔又乾淨舒適，早餐色香味俱佳！」 — 朱先生</blockquote>
-          <blockquote style="margin:0;padding:14px;border-left:4px solid #eee;background:#fafafa;border-radius:8px">「老闆娘很熱心幫忙規劃行程，絕對值得再訪！」 — 劉小姐</blockquote>
+          <h3>口碑好評 <span style="font-size:13px; font-weight:400; color:#667; margin-left:8px;">(4.9 ⭐⭐⭐⭐⭐)</span></h3>
+          <div class="list-container" id="reviews-container">
+             </div>
         </article>
+
         <article class="card" id="deals" style="margin-top:18px">
           <h3>優惠方案</h3>
-          <ul>
-            <li>平日連住兩晚以上，享 9 折優惠。</li>
-            <li>三人同行入住海景房，第 3 人享 5 折優惠。</li>
-            <li>生日當月入住，加贈精緻甜點與飲品。</li>
-          </ul>
+          <div class="list-container" id="deals-container">
+             </div>
         </article>
         
         <article class="card" id="transport" style="margin-top:18px">
@@ -747,6 +777,7 @@
       </ul>
     </div>
   </div>
+  <script src="site_data.js"></script>
   <script src="marquee_content.js"></script>
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});});
@@ -831,6 +862,7 @@
         }
     });
     
+    // 跑馬燈邏輯 - 改寫為讀取 marqueeConfig (從 site_data.js)
     document.addEventListener('DOMContentLoaded', () => {
         const marqueeText = document.getElementById('marquee-text');
         const pauseButton = document.getElementById('marquee-pause');
@@ -868,7 +900,7 @@
         }
 
         function startMarqueeCycle() {
-            if (marqueeConfig.messages.length > 1) {
+            if (typeof marqueeConfig !== 'undefined' && marqueeConfig.messages && marqueeConfig.messages.length > 1) {
                 marqueeInterval = setInterval(() => {
                     currentMessageIndex = (currentMessageIndex + 1) % marqueeConfig.messages.length;
                     updateMarquee();
@@ -912,14 +944,73 @@
                 }
             });
         }
+        
+        // ============================================
+        // 自動載入內容 (News, Deals, Reviews)
+        // ============================================
+        
+        // 1. 載入 News
+        const newsContainer = document.getElementById('news-container');
+        if(newsContainer && typeof newsData !== 'undefined') {
+            newsData.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${item.title}</strong>
+                    <time>${item.date}</time>
+                    <p style="margin:6px 0 0">${item.content}</p>
+                `;
+                newsContainer.appendChild(li);
+            });
+        }
+
+        // 2. 載入 Deals
+        const dealsContainer = document.getElementById('deals-container');
+        if(dealsContainer && typeof dealsData !== 'undefined') {
+            dealsData.forEach(deal => {
+                const div = document.createElement('div');
+                div.className = 'deal-item';
+                div.innerHTML = `
+                    <div class="deal-icon">${deal.icon}</div>
+                    <div class="deal-content">
+                        <h4>${deal.title} <span class="highlight-tag">${deal.tag}</span></h4>
+                        <p>${deal.desc}</p>
+                    </div>
+                `;
+                dealsContainer.appendChild(div);
+            });
+        }
+
+        // 3. 載入 Reviews (新版圖示列表樣式)
+        const reviewsContainer = document.getElementById('reviews-container');
+        if(reviewsContainer && typeof reviewsData !== 'undefined') {
+            reviewsData.forEach(review => {
+                // 產生星星字串
+                let starsHtml = '';
+                for(let i=0; i<review.stars; i++) starsHtml += '⭐';
+                
+                const div = document.createElement('div');
+                div.className = 'review-item';
+                div.innerHTML = `
+                    <div class="review-avatar">${review.avatar}</div>
+                    <div class="review-content">
+                        <h4>${review.name} <span class="review-stars" style="margin-left:6px">${starsHtml}</span></h4>
+                        <p>「${review.content}」</p>
+                        <span class="review-source">${review.source}</span>
+                    </div>
+                `;
+                reviewsContainer.appendChild(div);
+            });
+        }
     });
 
-    const prices = {
+    // 讀取外部定義的價格，若無則使用預設
+    const prices = (typeof roomPrices !== 'undefined') ? roomPrices : {
         Dreamy: 4800,
         Mountain: 5800,
         Sky: 7800,
         Shuttle: 600
     };
+    
     const bookingForm = document.getElementById('bookingForm');
     const checkinDateInput = document.getElementById('checkin');
     const checkoutDateInput = document.getElementById('checkout');
