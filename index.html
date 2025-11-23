@@ -29,6 +29,7 @@
       max-width:1200px;
       margin: 0 auto;
       width: 100%;
+      position: relative; /* For mobile nav absolute positioning */
     }
     .nav.nav-scrolled {
       background: rgba(11,37,69, 0.95);
@@ -95,9 +96,11 @@
         height: 30px;
     }
 
+    /* Desktop Navigation Default */
     nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0}
     nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-weight:500}
     nav a:hover{background:rgba(255,255,255,0.1)}
+    
     .hero{
       max-width:1200px;
       margin:32px auto 0;
@@ -371,10 +374,21 @@
         scroll-margin-top: 125px; 
     }
 
+    /* Menu Toggle Button (Default hidden) */
     .menu-toggle {
         display: none;
+        font-size: 26px;
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
     }
     
+    /* Mobile Sticky Booking Button (Default hidden) */
+    .mobile-book-btn {
+        display: none;
+    }
+
+    /* RWD Setting for Mobile (<=768px) */
     @media (max-width: 768px) {
       header {
         padding-top: 100px; 
@@ -387,12 +401,19 @@
         padding-top: 8px; 
         padding-bottom: 8px;
       }
-      .nav.nav-scrolled nav a { 
-        font-size: 14px; 
-        padding: 5px 8px;
+      /* 重設漢堡選單的佈局 */
+      .nav .wrap-content {
+        flex-direction: row; /* 恢復橫向排列，讓Logo在左，漢堡在右 */
+        align-items: center; 
+        justify-content: space-between;
+        gap: 0; 
+        width: 100%;
+        padding-bottom: 0; 
       }
+      
       .brand {
-        padding-left: 2px;
+        width: auto; /* 不再佔滿整行 */
+        padding-bottom: 0; 
       }
       .brand-logo {
         width: 40px;
@@ -405,43 +426,48 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      .timer {
-        z-index: 1200;
+
+      /* 顯示漢堡按鈕 */
+      .menu-toggle {
+          display: block;
       }
-      header[data-bg="0"]::before { background-image:url('sunrise-mobile.jpg'); }
-      header[data-bg="1"]::before { background-image:url('sea-clouds-mobile.jpg'); }
-      header[data-bg="2"]::before { background-image:url('sunset-mobile.jpg'); }
-      header[data-bg="3"]::before { background-image:url('starry-sky-mobile.jpg'); }
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .nav .wrap-content {
-        flex-direction: column;
-        align-items: flex-start; 
-        gap: 0; 
-        width: 100%;
-        padding-bottom: 20px; 
-      }
-      .brand {
-        width: 100%; 
-        justify-content: flex-start; 
-        padding-bottom: 5px; 
-      }
+
+      /* 隱藏預設導覽列，改為絕對定位的下拉選單 */
       nav {
+        display: none; /* 預設隱藏 */
+        position: absolute;
+        top: 100%; /* 接在導覽列正下方 */
+        left: 0;
         width: 100%;
+        background: rgba(11, 37, 69, 0.98); /* 深色背景，高不透明度 */
+        padding: 15px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        border-radius: 0 0 12px 12px;
       }
+      
+      /* 當加上 active class 時顯示選單 */
+      nav.active {
+          display: block;
+      }
+
       nav ul {
-        flex-direction: row;
-        gap: 4px; 
-        justify-content: space-around; 
-        flex-wrap: wrap; 
-        padding: 0 5px; 
+        flex-direction: column; /* 垂直排列 */
+        gap: 0; 
+        padding: 0; 
+        align-items: stretch;
       }
       nav a {
-        font-size: 13px; 
-        padding: 5px 6px; 
-        border-radius: 6px;
+        display: block;
+        font-size: 15px; 
+        padding: 12px 20px; 
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        text-align: center;
       }
+      nav a:last-child {
+          border-bottom: none;
+      }
+
       .hero {
         margin-top: 10px; 
         padding: 12px; 
@@ -469,6 +495,36 @@
       #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
         scroll-margin-top: 160px; 
       }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* 顯示手機版懸浮訂房按鈕 */
+      .mobile-book-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 90%;
+          max-width: 400px;
+          background: #ff4757; /* 醒目的紅色 */
+          color: white;
+          font-weight: 700;
+          font-size: 16px;
+          padding: 14px;
+          border-radius: 50px;
+          box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+          z-index: 990; /* 在 lightbox 之下，但在內容之上 */
+          text-decoration: none;
+          transition: transform 0.2s, background 0.2s;
+      }
+      .mobile-book-btn:active {
+          transform: translateX(-50%) scale(0.96);
+          background: #e0404e;
+      }
     }
   </style>
 </head>
@@ -478,7 +534,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (TestM.. V5.03.014Gm)</h1>
+        <h1>月光藍海 (TestM..V5.03.018Gm)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -700,6 +756,9 @@
       </aside>
     </section>
   </main>
+  
+  <a href="#booking" class="mobile-book-btn">立即線上訂房</a>
+
   <footer>
     <div class="wrap">
       <div class="footer-col">
@@ -862,6 +921,32 @@
         }
     });
     
+    // 漢堡選單控制邏輯
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('nav');
+    
+    if(menuToggle && navMenu) {
+        // 點擊漢堡按鈕切換選單顯示
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // 避免事件冒泡
+            navMenu.classList.toggle('active');
+        });
+
+        // 點擊選單內的連結後，自動收合選單
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // 點擊網頁其他地方關閉選單
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+
     // 跑馬燈邏輯 - 改寫為讀取 marqueeConfig (從 site_data.js)
     document.addEventListener('DOMContentLoaded', () => {
         const marqueeText = document.getElementById('marquee-text');
