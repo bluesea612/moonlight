@@ -227,7 +227,7 @@
         color: var(--accent);
     }
 
-    /* 跑馬燈高度增加 50% (Desktop: 28px -> 42px) */
+    /* 跑馬燈高度 */
     .marquee-container {
         width: 100%;
         overflow: hidden;
@@ -276,7 +276,6 @@
     }
     
     @media (max-width: 768px) {
-        /* 手機版跑馬燈高度增加 50% (24px -> 36px) */
         .marquee-container {
             height: 36px;
             margin-bottom: 10px;
@@ -299,16 +298,28 @@
     
     .timer {
       position: absolute;
-      top: 20px; 
+      top: auto; 
+      bottom: 5px;
       right: 16px;
-      background: transparent;
+      background: rgba(0,0,0,0.3); 
+      padding: 0 6px;
+      height: 15px;
+      line-height: 15px; 
+      font-size: 11px;
+      border-radius: 4px;
+      font-weight: 400;
       color: white;
-      padding: 0;
-      border-radius: 0;
-      font-size: 14px;
       z-index: 1200;
-      font-weight: bold;
       text-align: right;
+    }
+    @media (min-width: 769px) {
+      .timer {
+        top: 20px; 
+        bottom: auto;
+        background: transparent;
+        font-weight: bold;
+        font-size: 14px;
+      }
     }
     
     .image-nav {
@@ -321,6 +332,12 @@
       justify-content: flex-end;
       padding-bottom: 5px;
     }
+    @media (max-width: 768px) {
+       .image-nav {
+         right: 70px;
+       }
+    }
+    
     .image-nav button {
       background: rgba(255,255,255,0.3);
       border: none;
@@ -338,6 +355,7 @@
     .image-nav button:hover, .image-nav button.active {
       background: rgba(255,255,255,0.7);
     }
+    
     .room-gallery a{cursor:zoom-in;display:block}
     .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0s 0.2s}
     .lightbox.open{visibility:visible;opacity:1;transition:opacity 0.2s,visibility 0s}
@@ -445,7 +463,7 @@
         left: 0;
         width: 100%;
         background: rgba(11, 37, 69, 0.98); 
-        padding: 15px; /* 增加 padding */
+        padding: 15px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         border-radius: 0 0 12px 12px;
       }
@@ -457,18 +475,18 @@
       /* 手機版選單改為雙欄 Grid */
       nav ul {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* 兩欄 */
-        gap: 12px; /* 增加間格方便點選 */
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
         padding: 0; 
         margin: 0;
       }
       nav a {
         display: block;
-        font-size: 16px; /* 增加字體 */
-        padding: 14px 5px; /* 增加高度 */
+        font-size: 16px; 
+        padding: 14px 5px; 
         border-radius: 8px;
         border-bottom: none;
-        background: rgba(255,255,255,0.08); /* 增加背景框方便識別 */
+        background: rgba(255,255,255,0.08); 
         text-align: center;
       }
 
@@ -488,26 +506,6 @@
         padding: 4px 10px;
         font-size: 12px;
       }
-      
-      /* 修改 1: 手機版 Timer 位置調整 */
-      .timer {
-        top: auto;        /* 取消頂部定位 */
-        bottom: 5px;      /* 改為底部 */
-        right: 16px;      /* 最右側 */
-        background: rgba(0,0,0,0.3); /* 增加底色使其像按鈕 */
-        padding: 0 6px;
-        height: 15px;     /* 高度與按鈕一致 */
-        line-height: 15px; /* 垂直置中 */
-        font-size: 11px;
-        border-radius: 4px;
-        font-weight: 400;
-      }
-      
-      /* 修改 1: 手機版 Image Nav 位置調整 (向左避開 Timer) */
-      .image-nav {
-        bottom: 5px;
-        right: 70px; /* 向左推，給 Timer 留空間 */
-      }
 
       #intro, #news, #rooms, #reviews, #deals, #transport, #booking { 
         scroll-margin-top: 160px; 
@@ -516,25 +514,24 @@
         grid-template-columns: 1fr;
       }
 
-      /* 修改 3: 手機版懸浮訂房按鈕改造 */
       .mobile-book-btn {
           display: flex;
           align-items: center;
           justify-content: center;
           position: fixed;
-          bottom: 10px;      /* 靠底部 */
-          left: auto;        /* 取消置中 */
-          right: 10px;       /* 靠右側 */
-          transform: none;   /* 取消 transform */
-          width: 33%;        /* 寬度 1/3 */
+          bottom: 10px;
+          left: auto;
+          right: 10px;
+          transform: none;
+          width: 33%;
           max-width: 140px;
-          background: rgba(240, 240, 240, 0.9); /* 透明淡灰色 */
-          color: #333;       /* 深色文字 */
+          background: rgba(240, 240, 240, 0.9);
+          color: #333;
           font-weight: 700;
           font-size: 13px;
-          padding: 7px;      /* 高度留 1/2 (原本14px) */
+          padding: 7px;
           border-radius: 50px;
-          border: 1px solid rgba(0,0,0,0.1); /* 增加細框 */
+          border: 1px solid rgba(0,0,0,0.1);
           box-shadow: 0 4px 10px rgba(0,0,0,0.1);
           z-index: 990; 
           text-decoration: none;
@@ -553,7 +550,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (TestM..V5.03.019Gm)</h1>
+        <h1>月光藍海 (TestM..V5.03.024Gm)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -703,14 +700,13 @@
             <a href="#" class="rules-link" data-target="booking-rules-lightbox">訂房須知</a>
             <a href="#" class="rules-link" data-target="checkin-rules-lightbox">入住規定</a>
           </div>
-          <form class="booking-form" id="bookingForm" action="https://formspree.io/f/mblabdyr" method="POST">
+          <form class="booking-form" id="bookingForm">
             <label for="name">您的姓名</label>
             <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
             <label for="phone">您的手機</label>
             <input type="tel" id="phone" name="手機" required placeholder="請輸入手機號碼">
             <label for="email-input">您的 Email</label>
-            <input type="email" id="email-input" name="Email" required placeholder="example@gmail.com">
-            <input type="hidden" name="_replyto" value="email">
+            <input type="email" id="email-input" name="email" required placeholder="example@gmail.com">
             
             <label for="checkin">入住日期</label>
             <input type="date" id="checkin" name="入住日期" required>
@@ -719,7 +715,7 @@
             
             <p style="margin:5px 0 10px; font-size:13px; color:var(--dark); font-weight:600; padding:8px; background:#f0f6ff; border-radius:6px;">
                 價格參考：夢幻山景房 NT$4,800起 / 山海景觀房 NT$5,800起 / 天空陽台家庭房 NT$7,800起
-                <span style="display:block; font-size:12px; font-weight:400; color:var(--muted); margin-top:4px;">(實際價格以電話/Email確認為準，假日或特殊節日價格可能不同)</span>
+                <span style="display:block; font-size:12px; font-weight:400; color:var(--muted); margin-top:4px;">(週五~週日為假日價，11-3月冬季不分平假日皆為平日價)</span>
             </p>
 
             <label for="room">選擇房型</label>
@@ -740,15 +736,17 @@
             <label for="notes" style="margin-top:10px;">特殊需求/備註</label>
             <textarea id="notes" name="特殊需求備註" rows="3" placeholder="例如：素食早餐、嬰兒床需求、預計抵達時間..."></textarea>
             
+            <input type="hidden" id="hidden-total-price" name="預估總價" value="">
+
             <div class="total-display">
-                <span>預估房費總計 (平日價)</span>
+                <span>預估房費總計</span>
                 <span class="total-amount" id="booking-total">NT$ 0</span>
             </div>
             <p style="font-size:12px; color:var(--muted); margin: -5px 0 10px;">
-                <span style="color:var(--accent); font-weight:600;">* 價格為平日預估，僅供參考，不含假日加成。</span>
+                <span style="color:var(--accent); font-weight:600;">* 價格為即時預估，實際金額以確認信為準。</span>
             </p>
 
-            <button type="submit">送出訂房需求單</button>
+            <button type="submit" id="submit-btn">送出訂房需求單</button>
           </form>
           
           <p style="margin-top:10px;font-size:13px;color:var(--muted); line-height:1.5;">
@@ -858,7 +856,8 @@
   <script src="site_data.js"></script>
   <script src="marquee_content.js"></script>
   <script>
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});});
+    // 修正：平滑捲動程式碼，增加 :not([href="#"]) 以排除燈箱連結
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth',block:'start'});});});
     
     // 整合圖片燈箱和規則燈箱
     const lightboxes = document.querySelectorAll('.lightbox');
@@ -945,20 +944,17 @@
     const navMenu = document.querySelector('nav');
     
     if(menuToggle && navMenu) {
-        // 點擊漢堡按鈕切換選單顯示
         menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // 避免事件冒泡
+            e.stopPropagation(); 
             navMenu.classList.toggle('active');
         });
 
-        // 點擊選單內的連結後，自動收合選單
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
         });
 
-        // 點擊網頁其他地方關閉選單
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
                 navMenu.classList.remove('active');
@@ -966,7 +962,7 @@
         });
     }
 
-    // 跑馬燈邏輯 - 改寫為讀取 marqueeConfig (從 site_data.js)
+    // 跑馬燈邏輯 (Site Data)
     document.addEventListener('DOMContentLoaded', () => {
         const marqueeText = document.getElementById('marquee-text');
         const pauseButton = document.getElementById('marquee-pause');
@@ -989,6 +985,14 @@
 
                 const styleSheet = document.styleSheets[0];
                 const keyframeName = `marquee-${currentMessageIndex}`;
+                
+                // 檢查並移除舊的 keyframe 規則以避免重複
+                for (let i = styleSheet.cssRules.length - 1; i >= 0; i--) {
+                    if (styleSheet.cssRules[i].name === `marquee-${(currentMessageIndex - 1 + marqueeConfig.messages.length) % marqueeConfig.messages.length}` || styleSheet.cssRules[i].name === keyframeName) {
+                        styleSheet.deleteRule(i);
+                    }
+                }
+                
                 const keyframeRule = `
                     @keyframes ${keyframeName} {
                         0% { transform: translateX(50%); }
@@ -1049,86 +1053,90 @@
             });
         }
         
-        // ============================================
         // 自動載入內容 (News, Deals, Reviews)
-        // ============================================
-        
-        // 1. 載入 News
         const newsContainer = document.getElementById('news-container');
         if(newsContainer && typeof newsData !== 'undefined') {
             newsData.forEach(item => {
                 const li = document.createElement('li');
-                li.innerHTML = `
-                    <strong>${item.title}</strong>
-                    <time>${item.date}</time>
-                    <p style="margin:6px 0 0">${item.content}</p>
-                `;
+                li.innerHTML = `<strong>${item.title}</strong><time>${item.date}</time><p style="margin:6px 0 0">${item.content}</p>`;
                 newsContainer.appendChild(li);
             });
         }
 
-        // 2. 載入 Deals
         const dealsContainer = document.getElementById('deals-container');
         if(dealsContainer && typeof dealsData !== 'undefined') {
             dealsData.forEach(deal => {
                 const div = document.createElement('div');
                 div.className = 'deal-item';
-                div.innerHTML = `
-                    <div class="deal-icon">${deal.icon}</div>
-                    <div class="deal-content">
-                        <h4>${deal.title} <span class="highlight-tag">${deal.tag}</span></h4>
-                        <p>${deal.desc}</p>
-                    </div>
-                `;
+                div.innerHTML = `<div class="deal-icon">${deal.icon}</div><div class="deal-content"><h4>${deal.title} <span class="highlight-tag">${deal.tag}</span></h4><p>${deal.desc}</p></div>`;
                 dealsContainer.appendChild(div);
             });
         }
 
-        // 3. 載入 Reviews (新版圖示列表樣式)
         const reviewsContainer = document.getElementById('reviews-container');
         if(reviewsContainer && typeof reviewsData !== 'undefined') {
             reviewsData.forEach(review => {
-                // 產生星星字串
                 let starsHtml = '';
                 for(let i=0; i<review.stars; i++) starsHtml += '⭐';
-                
                 const div = document.createElement('div');
                 div.className = 'review-item';
-                div.innerHTML = `
-                    <div class="review-avatar">${review.avatar}</div>
-                    <div class="review-content">
-                        <h4>${review.name} <span class="review-stars" style="margin-left:6px">${starsHtml}</span></h4>
-                        <p>「${review.content}」</p>
-                        <span class="review-source">${review.source}</span>
-                    </div>
-                `;
+                div.innerHTML = `<div class="review-avatar">${review.avatar}</div><div class="review-content"><h4>${review.name} <span class="review-stars" style="margin-left:6px">${starsHtml}</span></h4><p>「${review.content}」</p><span class="review-source">${review.source}</span></div>`;
                 reviewsContainer.appendChild(div);
             });
         }
     });
 
-    // 讀取外部定義的價格，若無則使用預設
-    const prices = (typeof roomPrices !== 'undefined') ? roomPrices : {
-        Dreamy: 4800,
-        Mountain: 5800,
-        Sky: 7800,
+    // ==========================================
+    //  進階房價計算邏輯 (平日/假日/冬季)
+    // ==========================================
+    
+    // 定義房價結構：平日價 (Mon-Thu) vs 假日價 (Fri-Sun)
+    const roomRates = {
+        Dreamy:   { weekday: 4800, weekend: 5800 },
+        Mountain: { weekday: 5800, weekend: 6800 },
+        Sky:      { weekday: 7800, weekend: 8800 },
         Shuttle: 600
     };
-    
+
+    const weekendDays = [0, 5, 6]; 
+    const winterMonths = [0, 1, 2, 10, 11];
+
     const bookingForm = document.getElementById('bookingForm');
     const checkinDateInput = document.getElementById('checkin');
     const checkoutDateInput = document.getElementById('checkout');
     const roomSelect = document.getElementById('room');
     const addonShuttle = document.getElementById('addon-shuttle');
     const bookingTotalDisplay = document.getElementById('booking-total');
+    const hiddenTotalPrice = document.getElementById('hidden-total-price');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    // 您的 Web3Forms Access Key
+    const WEB3FORMS_ACCESS_KEY = "77fc5501-dc1d-4f30-8459-3a215d62bebc";
 
-    function calculateNights(checkin, checkout) {
-        const checkinDate = new Date(checkin);
-        const checkoutDate = new Date(checkout);
-        if (isNaN(checkinDate) || isNaN(checkoutDate)) return 0;
-        const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-        const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        return nights > 0 ? nights : 0;
+    // 計算總房價 (逐日累加)
+    function calculateTotalRate(checkinStr, checkoutStr, roomKey) {
+        if (!roomRates[roomKey]) return 0;
+        
+        let currentDate = new Date(checkinStr);
+        const endDate = new Date(checkoutStr);
+        let totalPrice = 0;
+
+        while (currentDate < endDate) {
+            const dayOfWeek = currentDate.getDay(); // 0-6
+            const month = currentDate.getMonth();   // 0-11
+            
+            if (winterMonths.includes(month)) {
+                totalPrice += roomRates[roomKey].weekday;
+            } else {
+                if (weekendDays.includes(dayOfWeek)) {
+                    totalPrice += roomRates[roomKey].weekend;
+                } else {
+                    totalPrice += roomRates[roomKey].weekday;
+                }
+            }
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        return totalPrice;
     }
 
     function updateBookingTotal() {
@@ -1137,39 +1145,92 @@
         const isShuttleSelected = addonShuttle.checked;
         const selectedOption = roomSelect.options[roomSelect.selectedIndex];
         const selectedRoomKey = selectedOption.getAttribute('data-price-key');
-        const nights = calculateNights(checkin, checkout);
-        let subtotal = nights > 0 && prices[selectedRoomKey] ? prices[selectedRoomKey] * nights : 0;
-        let addonFee = isShuttleSelected ? prices.Shuttle : 0;
-        const total = subtotal + addonFee;
-        bookingTotalDisplay.textContent = total > 0 ? total.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }) : 'NT$ 0';
+
+        if (checkin && checkout && new Date(checkout) > new Date(checkin)) {
+            const roomTotal = calculateTotalRate(checkin, checkout, selectedRoomKey);
+            const addonFee = isShuttleSelected ? roomRates.Shuttle : 0;
+            const total = roomTotal + addonFee;
+
+            const formattedTotal = total.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+            bookingTotalDisplay.textContent = formattedTotal;
+            hiddenTotalPrice.value = formattedTotal; 
+        } else {
+            bookingTotalDisplay.textContent = 'NT$ 0';
+            hiddenTotalPrice.value = '0';
+        }
     }
 
-    function validateForm(event) {
+    function validateDates() {
         const checkin = checkinDateInput.value;
         const checkout = checkoutDateInput.value;
         if (!checkin || !checkout) return true;
+        
         const checkinDate = new Date(checkin);
         const checkoutDate = new Date(checkout);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
+
         if (checkinDate.getTime() < today.getTime()) {
-            alert('❌ 入住日期不能選擇今天或過去的日期，請重新選擇。');
-            event.preventDefault();
+            alert('❌ 入住日期不能選擇今天或過去的日期。');
             return false;
         }
         if (checkoutDate.getTime() <= checkinDate.getTime()) {
-            alert('❌ 退房日期必須晚於入住日期，請確認您的住宿天數。');
-            event.preventDefault();
-            return false;
-        }
-        const nights = calculateNights(checkin, checkout);
-        if (nights < 1) {
-            alert('❌ 系統偵測到入住晚數不足一晚，請確認日期選擇是否正確。');
-            event.preventDefault();
+            alert('❌ 退房日期必須晚於入住日期。');
             return false;
         }
         return true;
     }
+
+    // ==========================================
+    //  雙重送出邏輯 (V5.03.024Gm 修正版 - Web3Forms 改回 FormData 解決亂碼)
+    // ==========================================
+    
+    bookingForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+        
+        if(!validateDates()) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '正在送出訂單...';
+
+        // 1. 準備 Formspree 的資料 (FormData) - Formspree 仍然是我們的主力儲存後台
+        const formDataForFormspree = new FormData(bookingForm);
+
+        // 2. 準備 Web3Forms 的資料 (FormData) - 關鍵：改用 FormData 傳輸，確保中文 Email 正常顯示
+        const formDataForWeb3Forms = new FormData(bookingForm);
+        formDataForWeb3Forms.append('access_key', WEB3FORMS_ACCESS_KEY);
+        
+        // 定義 API 請求
+        // 請求 A: Formspree (送 FormData) - 保持不變
+        const formspreeRequest = fetch("https://formspree.io/f/mblabdyr", {
+            method: "POST",
+            body: formDataForFormspree,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        // 請求 B: Web3Forms (送 FormData) - 關鍵修正：改用 FormData 傳輸
+        const web3formsRequest = fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json' 
+            },
+            body: formDataForWeb3Forms // <--- 使用 FormData 傳輸
+        });
+
+        try {
+            await Promise.all([formspreeRequest, web3formsRequest]);
+            
+            alert('✅ 訂房需求單已成功送出！\n我們會盡快透過 Email 或電話與您聯繫。\n\n請檢查您的信箱，如果 Web3Forms 寄出的 Email 中文顯示正常，即確認修正完成！');
+            bookingForm.reset();
+            updateBookingTotal();
+        } catch (error) {
+            console.error('Submission Error:', error);
+            alert('⚠️ 系統發生錯誤，請稍後再試，或直接撥打電話訂房。');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '送出訂房需求單';
+        }
+    });
 
     checkinDateInput.addEventListener('change', updateBookingTotal);
     checkoutDateInput.addEventListener('change', updateBookingTotal);
