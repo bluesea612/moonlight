@@ -563,7 +563,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (TestM..V5.03.027Gm)</h1>
+        <h1>月光藍海 (TestM..V5.03.028Gm)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -1227,7 +1227,7 @@
     }
 
     // ==========================================
-    //  雙重送出邏輯 
+    //  雙重送出邏輯 (V5.03.028Gm 修正 Web3Forms 亂碼/接收問題)
     // ==========================================
     
     bookingForm.addEventListener('submit', async function(e) {
@@ -1238,29 +1238,33 @@
         submitBtn.disabled = true;
         submitBtn.textContent = '正在送出訂單...';
         
-        // 問題 3 修正：在送出前設定格式化的送出時間
+        // 設定格式化的送出時間
         submissionTimeInput.value = getFormattedSubmissionTime();
 
-        // 1. 準備 Formspree 的資料 (FormData)
+        // 1. Formspree 請求 (保留 FormData)
         const formDataForFormspree = new FormData(bookingForm);
-
-        // 2. 準備 Web3Forms 的資料 (FormData)
-        const formDataForWeb3Forms = new FormData(bookingForm);
-        formDataForWeb3Forms.append('access_key', WEB3FORMS_ACCESS_KEY);
-        
-        // 定義 API 請求
         const formspreeRequest = fetch("https://formspree.io/f/mblabdyr", {
             method: "POST",
             body: formDataForFormspree,
             headers: { 'Accept': 'application/json' }
         });
 
+        // 2. Web3Forms 請求 (改為 JSON 格式傳輸，解決亂碼和接收問題)
+        const dataForWeb3Forms = {};
+        // 將 FormData 轉換為純 JS Object
+        for (const [key, value] of new FormData(bookingForm).entries()) {
+            dataForWeb3Forms[key] = value;
+        }
+        dataForWeb3Forms['access_key'] = WEB3FORMS_ACCESS_KEY;
+
         const web3formsRequest = fetch("https://api.web3forms.com/submit", {
             method: "POST",
             headers: {
+                'Content-Type': 'application/json', // 關鍵：指定 JSON 格式
                 'Accept': 'application/json' 
             },
-            body: formDataForWeb3Forms 
+            // 關鍵：將資料物件轉換為 JSON 字串
+            body: JSON.stringify(dataForWeb3Forms)
         });
 
         try {
