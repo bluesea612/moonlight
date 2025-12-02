@@ -298,7 +298,7 @@
     
     .timer {
       position: absolute;
-      top: auto; 
+      /* 預設手機版在右下角 */
       bottom: 5px;
       right: 16px;
       background: rgba(0,0,0,0.3); 
@@ -312,30 +312,40 @@
       z-index: 1200;
       text-align: right;
     }
-    @media (min-width: 769px) {
-      .timer {
-        top: 20px; 
-        bottom: auto;
-        background: transparent;
-        font-weight: bold;
-        font-size: 14px;
-      }
-    }
     
     .image-nav {
       position: absolute;
       bottom: 5px;
-      right: 16px;
+      right: 70px; /* 給手機版計時器留出空間 */
       z-index: 100;
       display: flex;
       gap: 8px;
       justify-content: flex-end;
       padding-bottom: 5px;
     }
-    @media (max-width: 768px) {
-       .image-nav {
-         right: 70px;
-       }
+    
+    /* 針對桌機 (min-width: 769px) 的定位調整 (V5.03.027Gm: 保留右下角/透明/大小同按鈕的樣式) */
+    @media (min-width: 769px) {
+      .timer {
+        bottom: 5px; 
+        right: 16px; 
+        /* 樣式調整：透明、大小同按鈕 */
+        background: transparent; 
+        font-weight: 600;
+        /* 由於格式是 MM:SS，故字體調小一點 */
+        font-size: 10px; 
+        height: 15px; 
+        line-height: 15px; 
+        /* 寬度稍微拉大以容納 MM:SS */
+        width: 38px; 
+        color: white; 
+        z-index: 100;
+        text-align: right; 
+      }
+      .image-nav {
+         /* 讓按鈕組向左移，給計時器留出位置 */
+         right: 58px; /* 16px(timer right) + 4px(gap) + 38px(timer width) */
+      }
     }
     
     .image-nav button {
@@ -374,6 +384,9 @@
       .lightbox-content {
         max-width: 90%;
         padding: 15px;
+      }
+      .image-nav {
+         right: 70px;
       }
     }
     .rules-link {
@@ -550,7 +563,7 @@
     <div class="wrap-content">
       <div class="brand">
         <img src="logo1024.png" alt="月光藍海民宿Logo" class="brand-logo">
-        <h1>月光藍海 (TestM..V5.03.024Gm)</h1>
+        <h1>月光藍海 (TestM..V5.03.027Gm)</h1>
       </div>
       <div class="menu-toggle">☰</div>
       <nav>
@@ -701,6 +714,8 @@
             <a href="#" class="rules-link" data-target="checkin-rules-lightbox">入住規定</a>
           </div>
           <form class="booking-form" id="bookingForm">
+            <input type="hidden" id="submission-time" name="送出時間" value="">
+
             <label for="name">您的姓名</label>
             <input type="text" id="name" name="姓名" required placeholder="請輸入姓名">
             <label for="phone">您的手機</label>
@@ -893,6 +908,7 @@
     let timerInterval;
     let timeLeft = totalTimePerImage;
 
+    // V5.03.027Gm 修正：還原計時器格式為 MM:SS (V5.03.024Gm 狀態)
     function formatTime(seconds) {
       const min = Math.floor(seconds / 60).toString().padStart(2, '0');
       const sec = (seconds % 60).toString().padStart(2, '0');
@@ -908,22 +924,27 @@
       imageNavButtons[currentImageIndex].classList.add('active');
     }
 
+    // V5.03.027Gm 修正：還原計時器倒數邏輯 (V5.03.024Gm 狀態)
     function updateTimer() {
       timeLeft--;
-      if (timeLeft <= 0) {
-        timeLeft = totalTimePerImage;
+      if (timeLeft < 0) {
+        timeLeft = totalTimePerImage - 1; 
         currentImageIndex = (currentImageIndex + 1) % images.length;
         switchImage(currentImageIndex);
       }
       timerDisplay.textContent = formatTime(timeLeft);
     }
-
+    
+    // 初始設置
     switchImage(0);
-    timerInterval = setInterval(updateTimer, 1000);
+    timerDisplay.textContent = formatTime(totalTimePerImage); // 初始顯示 01:00
+    timerInterval = setInterval(updateTimer, 1000); // 1秒後開始倒數
 
+    // V5.03.027Gm 修正：還原按鈕點擊邏輯 (V5.03.024Gm 狀態)
     imageNavButtons.forEach(button => {
       button.addEventListener('click', () => {
         const newIndex = parseInt(button.dataset.index);
+        // 點擊按鈕時，只切換圖片，不重置計時器，不清除 Interval
         switchImage(newIndex);
       });
     });
@@ -988,7 +1009,7 @@
                 
                 // 檢查並移除舊的 keyframe 規則以避免重複
                 for (let i = styleSheet.cssRules.length - 1; i >= 0; i--) {
-                    if (styleSheet.cssRules[i].name === `marquee-${(currentMessageIndex - 1 + marqueeConfig.messages.length) % marqueeConfig.messages.length}` || styleSheet.cssRules[i].name === keyframeName) {
+                    if (styleSheet.cssRules[i].name && styleSheet.cssRules[i].name.startsWith('marquee-')) {
                         styleSheet.deleteRule(i);
                     }
                 }
@@ -1109,6 +1130,7 @@
     const bookingTotalDisplay = document.getElementById('booking-total');
     const hiddenTotalPrice = document.getElementById('hidden-total-price');
     const submitBtn = document.getElementById('submit-btn');
+    const submissionTimeInput = document.getElementById('submission-time'); 
     
     // 您的 Web3Forms Access Key
     const WEB3FORMS_ACCESS_KEY = "77fc5501-dc1d-4f30-8459-3a215d62bebc";
@@ -1120,6 +1142,11 @@
         let currentDate = new Date(checkinStr);
         const endDate = new Date(checkoutStr);
         let totalPrice = 0;
+
+        // 確保日期是有效的
+        if (isNaN(currentDate.getTime()) || isNaN(endDate.getTime()) || currentDate >= endDate) {
+             return 0;
+        }
 
         while (currentDate < endDate) {
             const dayOfWeek = currentDate.getDay(); // 0-6
@@ -1134,7 +1161,8 @@
                     totalPrice += roomRates[roomKey].weekday;
                 }
             }
-            currentDate.setDate(currentDate.getDate() + 1);
+            // 避免無限迴圈，務必使用 getTime() 增加 24 小時毫秒數
+            currentDate = new Date(currentDate.getTime() + (24 * 60 * 60 * 1000));
         }
         return totalPrice;
     }
@@ -1167,10 +1195,15 @@
         
         const checkinDate = new Date(checkin);
         const checkoutDate = new Date(checkout);
+        
+        // 為了避免時區問題，先將今天的日期設為午夜 0 點
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0); 
+        
+        // 確保輸入的日期也是以午夜 0 點比較
+        const checkinCompare = new Date(checkin + 'T00:00:00'); 
 
-        if (checkinDate.getTime() < today.getTime()) {
+        if (checkinCompare.getTime() < today.getTime()) {
             alert('❌ 入住日期不能選擇今天或過去的日期。');
             return false;
         }
@@ -1180,9 +1213,21 @@
         }
         return true;
     }
+    
+    // 問題 3 輔助函式：取得格式化的送出時間
+    function getFormattedSubmissionTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        
+        return `${year}/${month}/${day}, ${hours}:${minutes}`;
+    }
 
     // ==========================================
-    //  雙重送出邏輯 (V5.03.024Gm 修正版 - Web3Forms 改回 FormData 解決亂碼)
+    //  雙重送出邏輯 
     // ==========================================
     
     bookingForm.addEventListener('submit', async function(e) {
@@ -1192,35 +1237,36 @@
 
         submitBtn.disabled = true;
         submitBtn.textContent = '正在送出訂單...';
+        
+        // 問題 3 修正：在送出前設定格式化的送出時間
+        submissionTimeInput.value = getFormattedSubmissionTime();
 
-        // 1. 準備 Formspree 的資料 (FormData) - Formspree 仍然是我們的主力儲存後台
+        // 1. 準備 Formspree 的資料 (FormData)
         const formDataForFormspree = new FormData(bookingForm);
 
-        // 2. 準備 Web3Forms 的資料 (FormData) - 關鍵：改用 FormData 傳輸，確保中文 Email 正常顯示
+        // 2. 準備 Web3Forms 的資料 (FormData)
         const formDataForWeb3Forms = new FormData(bookingForm);
         formDataForWeb3Forms.append('access_key', WEB3FORMS_ACCESS_KEY);
         
         // 定義 API 請求
-        // 請求 A: Formspree (送 FormData) - 保持不變
         const formspreeRequest = fetch("https://formspree.io/f/mblabdyr", {
             method: "POST",
             body: formDataForFormspree,
             headers: { 'Accept': 'application/json' }
         });
 
-        // 請求 B: Web3Forms (送 FormData) - 關鍵修正：改用 FormData 傳輸
         const web3formsRequest = fetch("https://api.web3forms.com/submit", {
             method: "POST",
             headers: {
                 'Accept': 'application/json' 
             },
-            body: formDataForWeb3Forms // <--- 使用 FormData 傳輸
+            body: formDataForWeb3Forms 
         });
 
         try {
             await Promise.all([formspreeRequest, web3formsRequest]);
             
-            alert('✅ 訂房需求單已成功送出！\n我們會盡快透過 Email 或電話與您聯繫。\n\n請檢查您的信箱，如果 Web3Forms 寄出的 Email 中文顯示正常，即確認修正完成！');
+            alert('✅ 訂房需求單已成功送出！\n我們會盡快透過 Email 或電話與您聯繫。');
             bookingForm.reset();
             updateBookingTotal();
         } catch (error) {
